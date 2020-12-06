@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <groupId>com.bewsoftware.mojo</groupId>
     <artifactId>mdj-maven-plugin</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.7</version>
     <packaging>maven-plugin</packaging>
-    
+
     <name>MDj Maven Plugin</name>
-    <description>This plugin is a wrapper for the MDj-Cli program.</description>
+    <description>This plugin is a wrapper for the MDj-Cli program which processes markdown files into html files.</description>
 
     <prerequisites>
         <maven>3.5</maven>
@@ -38,7 +38,6 @@
         <maven.plugin.skipErrorNoDescriptorsFound>false</maven.plugin.skipErrorNoDescriptorsFound>
     </properties>
 
-    
     <licenses>
         <license>
             <name>GNU GENERAL PUBLIC LICENSE (Version 3, 29 June 2007)</name>
@@ -47,7 +46,7 @@
             <comments>A full copy of the license is supplied with the source code in the file: LICENSE.md</comments>
         </license>
     </licenses>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
@@ -100,16 +99,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.13.3</version>
-        </dependency>  
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.13.3</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
@@ -118,10 +107,11 @@
         <dependency>
             <groupId>com.bewsoftware</groupId>
             <artifactId>mdj-cli</artifactId>
-            <version>1.0.5</version>
+            <version>1.0.10</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
-    
+
     <profiles>
         <profile>
             <id>increment-build</id>
@@ -219,6 +209,29 @@
     </profiles>
 
     <build>
+        <resources>
+            <resource>
+                <directory>
+                    src/docs
+                </directory>
+                <excludes>
+                    <exclude>
+                        **/*
+                    </exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>
+                    target/docs
+                </directory>
+                <excludes>
+                    <exclude>
+                        **/*
+                    </exclude>
+                </excludes>
+            </resource>
+        </resources>
+
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -298,11 +311,11 @@
                 <plugin>                        
                     <groupId>com.bew.mojo</groupId>
                     <artifactId>simple-buildnumber-maven-plugin</artifactId>
-                    <version>1.0.14</version>
+                    <version>1.0.15</version>
                 </plugin>
             </plugins>
         </pluginManagement>
-        
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -344,10 +357,17 @@
                     <tempWebappDirectory>${basedir}/target/site/tempdir</tempWebappDirectory>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
         </plugins>
-
     </build>
-    
+
     <reporting>
         <plugins>
             <plugin>

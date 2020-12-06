@@ -9,48 +9,84 @@ import com.bewsoftware.common.InvalidParameterValueException;
 import com.bewsoftware.common.InvalidProgramStateException;
 import com.bewsoftware.fileio.ini.IniFileFormatException;
 import com.bewsoftware.mdj.cli.Main;
-import com.martiansoftware.jsap.JSAPException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugin.logging.Log;
 
-import static org.apache.maven.plugins.annotations.LifecyclePhase.COMPILE;
+import static org.apache.maven.plugins.annotations.LifecyclePhase.PREPARE_PACKAGE;
 
 /**
- * MdjMojo class description.
+ * MdjMojo class executes the underlying program, causing it to process
+ * the markdown files (*.md) in the {@link #source} directory,
+ * storing the output files (*.html) in the {@link #destination} directory.
+ * <p>
+ * Additional options are available for:
+ * <ul>
+ * <li>{@link #recursive} directory processing,</li>
+ * <li>{@link #wrapper} processing and</li>
+ * <li>{@link #verbosity} setting.</li>
+ * </ul>
+ * <p>
+ * <b>To use:</b><br>
+ * Add the following to your {@code pom.xml} file.
+ * <pre><code>
+ *&lt;project&gt;
+ *  ...
+ *  &lt;build&gt;
+ *    &lt;plugins&gt;
+ *      &lt;plugin&gt;
+ *          &lt;plugin&gt;
+ *             &lt;groupId&gt;com.bewsoftware.mojo&lt;/groupId&gt;
+ *             &lt;artifactId&gt;mdj-maven-plugin&lt;/artifactId&gt;
+ *             &lt;version&gt;1.0.7&lt;/version&gt;
+ *             &lt;executions&gt;
+ *                 &lt;execution&gt;
+ *                     &lt;goals&gt;
+ *                         &lt;goal&gt;mdj&lt;/goal&gt;
+ *                     &lt;/goals&gt;
+ *                 &lt;/execution&gt;
+ *             &lt;/executions&gt;
+ *         &lt;/plugin&gt;
+ *         ...
+ *      &lt;/plugin&gt;
+ *    &lt;/plugins&gt;
+ *  &lt;/build&gt;
+ *&lt;/project&gt;
+ * </code></pre>
+ * I suggest that putting it into a separate profile would be a good idea,
+ * so it only runs when you need it to.
  *
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
  * @since 0.1
  * @version 0.1
  */
-@Mojo(name = "mdj", defaultPhase = COMPILE)
+@Mojo(name = "mdj", defaultPhase = PREPARE_PACKAGE)
 public class MdjMojo extends AbstractMojo {
 
     /**
      * Define a static logger variable so that it references the
      * Logger instance named "CreateXMLMojoTest".
      */
-    private static final Logger log = LogManager.getLogger();
+    private final Log log = getLog();
 
     /**
      * The source directory for markdown files.
      */
-    @Parameter(defaultValue = "src/docs")
+    @Parameter(property = "mdj.directory.source", defaultValue = "src/docs")
     private String source;
 
     /**
      * The destination directory for HTML files.
      */
-    @Parameter(defaultValue = "target/docs")
+    @Parameter(property = "mdj.directory.destination", defaultValue = "target/docs")
     private String destination;
 
     /**
@@ -107,7 +143,8 @@ public class MdjMojo extends AbstractMojo {
 
         if (verbosity > 0)
         {
-            args.add("-v:" + verbosity);
+            args.add("-v");
+            args.add("" + verbosity);
         }
 
         log.info(args.toString());
@@ -118,21 +155,34 @@ public class MdjMojo extends AbstractMojo {
 
             if (exitcode == 4)
             {
+                log.info("Initializing wrapper directories and files...");
+
                 List<String> args2 = new ArrayList<>();
                 if (source.isBlank())
                 {
                     args2.add("-W");
                 } else
                 {
-                    args2.add("-W:" + source);
+                    args2.add("-W");
+                    args2.add(source);
+                }
+
+                if (verbosity > 0)
+                {
+                    args2.add("-v");
+                    args2.add("" + verbosity);
                 }
 
                 exitcode = Main.execute(args2.toArray(new String[0]));
 
+                if (exitcode == 0)
+                {
+                    log.info("Wrapper initialization complete.");
+                }
             }
 
             log.info("Exit: " + exitcode);
-        } catch (IOException | JSAPException | InvalidParameterValueException
+        } catch (IOException | InvalidParameterValueException
                  | IniFileFormatException | InvalidProgramStateException
                  | URISyntaxException ex)
         {
