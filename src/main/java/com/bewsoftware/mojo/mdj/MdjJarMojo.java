@@ -74,8 +74,8 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PACKAGE;
  *
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
- * @since 1.0
- * @version 1.0
+ * @since 0.1.7
+ * @version 0.1.7
  */
 @Mojo(name = "jar", defaultPhase = PACKAGE)
 public class MdjJarMojo extends AbstractMojo {
