@@ -42,7 +42,7 @@
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
                         <artifactId>mdj-maven-plugin</artifactId>
-                        <version>0.1.7</version>
+                        <version>0.24.0-SNAPSHOT</version>
                         <executions>
                             <execution>
                                 <id>MDj-Compile(release)</id>
@@ -58,6 +58,7 @@
                                 <configuration>
                                     <jarSrcDir>target/docs</jarSrcDir>
                                     <jarFilename>${project.build.finalName}-manual.jar</jarFilename>
+                                    <docRootDir>src/docs</docRootDir>
                                     <verbosity>3</verbosity>
                                 </configuration>
                             </execution>
@@ -69,6 +70,7 @@
                                 <configuration>
                                     <jarSrcDir>src/docs</jarSrcDir>
                                     <jarFilename>${project.build.finalName}-manual-src.jar</jarFilename>
+                                    <docRootDir>src/docs</docRootDir>
                                     <verbosity>3</verbosity>
                                 </configuration>
                             </execution>

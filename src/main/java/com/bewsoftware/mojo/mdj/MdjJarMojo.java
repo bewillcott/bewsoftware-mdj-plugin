@@ -75,7 +75,7 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PACKAGE;
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
  * @since 0.1.7
- * @version 0.1.7
+ * @version 0.24.0
  */
 @Mojo(name = "jar", defaultPhase = PACKAGE)
 public class MdjJarMojo extends AbstractMojo {
@@ -133,6 +133,17 @@ public class MdjJarMojo extends AbstractMojo {
     private String jarSrcDir;
 
     /**
+     * The document root directory.
+     * <p>
+     * This is the same directory as the root of your document source files (*.md).<br>
+     * For instance it might be: {@code src/docs/manual}. This must be supplied even if
+     * you are packaging your document source files, giving the same directory
+     * as for: {@link #jarSrcDir}. The program makes <b>no</b> assumptions.
+     */
+    @Parameter(required = true)
+    private String docRootDir;
+
+    /**
      * Define a static logger variable so that it references the
      * Logger instance named "CreateXMLMojoTest".
      */
@@ -158,7 +169,9 @@ public class MdjJarMojo extends AbstractMojo {
         List<String> args = new ArrayList<>();
 
         args.add("-j");
-        args.add(prepareJarFilePath() + ";" + prepareJarSrcPath());
+        args.add(prepareJarFilePath() + ";"
+                 + prepareDirectoryPath(jarSrcDir) + ";"
+                 + prepareDirectoryPath(docRootDir));
 
         if (verbosity > 0)
         {
@@ -171,11 +184,12 @@ public class MdjJarMojo extends AbstractMojo {
         // Execute the program code...
         try
         {
-            int exitcode = Main.execute(args.toArray(new String[0]));
+            int exitcode = Main.execute(args.toArray(new String[args.size()]));
             log.info("Exit: " + exitcode);
-        } catch (IOException | IniFileFormatException | URISyntaxException ex)
+        } catch (IOException | IniFileFormatException | URISyntaxException | InterruptedException ex)
         {
             log.error(MdjJarMojo.class.getName(), ex);
+            throw new MojoExecutionException("MDj CLI threw an exception:", ex);
         }
     }
 
@@ -204,21 +218,20 @@ public class MdjJarMojo extends AbstractMojo {
     }
 
     /**
-     * Check the {@link #jarSrcDir}'s path. Prepend as needed, making it
-     * absolute.
+     * Check the directory's path and make it absolute.
      *
-     * @return full path to source directory.
+     * @return full path to directory.
      */
-    private String prepareJarSrcPath() {
+    private String prepareDirectoryPath(String directory) {
         String rtn = "";
-        Path jarSrcPath = of(jarSrcDir).normalize();
+        Path dirPath = of(directory).normalize();
 
-        if (jarSrcPath.isAbsolute())
+        if (dirPath.isAbsolute())
         {
-            rtn = jarSrcPath.toString();
+            rtn = dirPath.toString();
         } else
         {
-            rtn = jarSrcPath.toAbsolutePath().toString();
+            rtn = dirPath.toAbsolutePath().toString();
         }
 
         return rtn;

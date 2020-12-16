@@ -4,7 +4,7 @@
 
     <groupId>com.bewsoftware.mojo</groupId>
     <artifactId>mdj-maven-plugin</artifactId>
-    <version>0.1.7</version>
+    <version>0.24.1-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>MDj Maven Plugin</name>
@@ -15,7 +15,7 @@
     </prerequisites>
 
     <properties>
-        <major.minor.version>0.1</major.minor.version>
+        <major.minor.version>0.24</major.minor.version>
         <maven.version>3.6.3</maven.version>
         <java.version>12</java.version>
         <source.encoding>UTF-8</source.encoding>
@@ -107,7 +107,7 @@
         <dependency>
             <groupId>com.bewsoftware</groupId>
             <artifactId>mdj-cli</artifactId>
-            <version>1.0.10</version>
+            <version>1.0.24</version>
             <type>jar</type>
         </dependency>
     </dependencies>
