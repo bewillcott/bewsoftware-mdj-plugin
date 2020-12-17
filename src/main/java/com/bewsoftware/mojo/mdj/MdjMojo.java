@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -20,7 +22,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugin.logging.Log;
 
-import static org.apache.maven.plugins.annotations.LifecyclePhase.PREPARE_PACKAGE;
+import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOURCES;
 
 /**
  * MdjMojo class executes the underlying program, causing it to process
@@ -68,7 +70,7 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PREPARE_PACKAG
  * @since 0.1
  * @version 0.1
  */
-@Mojo(name = "mdj", defaultPhase = PREPARE_PACKAGE)
+@Mojo(name = "mdj", defaultPhase = GENERATE_RESOURCES)
 public class MdjMojo extends AbstractMojo {
 
     /**
@@ -151,7 +153,7 @@ public class MdjMojo extends AbstractMojo {
 
         try
         {
-            int exitcode = Main.execute(args.toArray(new String[0]));
+            int exitcode = Main.execute(args.toArray(new String[args.size()]));
 
             if (exitcode == 4)
             {
@@ -183,10 +185,9 @@ public class MdjMojo extends AbstractMojo {
 
             log.info("Exit: " + exitcode);
         } catch (IOException | InvalidParameterValueException
-                 | IniFileFormatException | InvalidProgramStateException
-                 | URISyntaxException ex)
+                 | IniFileFormatException | InvalidProgramStateException | URISyntaxException ex)
         {
-            log.error(MdjMojo.class.getName(), ex);
+            Logger.getLogger(MdjMojo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

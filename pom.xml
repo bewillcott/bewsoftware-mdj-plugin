@@ -4,7 +4,7 @@
 
     <groupId>com.bewsoftware.mojo</groupId>
     <artifactId>mdj-maven-plugin</artifactId>
-    <version>0.1.7</version>
+    <version>0.24.3</version>
     <packaging>maven-plugin</packaging>
 
     <name>MDj Maven Plugin</name>
@@ -15,7 +15,7 @@
     </prerequisites>
 
     <properties>
-        <major.minor.version>0.1</major.minor.version>
+        <major.minor.version>0.24</major.minor.version>
         <maven.version>3.6.3</maven.version>
         <java.version>12</java.version>
         <source.encoding>UTF-8</source.encoding>
@@ -107,12 +107,159 @@
         <dependency>
             <groupId>com.bewsoftware</groupId>
             <artifactId>mdj-cli</artifactId>
-            <version>1.0.10</version>
+            <version>1.0.26</version>
             <type>jar</type>
         </dependency>
     </dependencies>
 
     <profiles>
+        <profile>
+            <id>clean-manual</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>mdj-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Clean</id>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>compile-manual</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>mdj-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Compile(interim)</id>
+                                <goals>
+                                    <goal>mdj</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>clean-compile-manual</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>mdj-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Clean-Compile</id>
+                                <goals>
+                                    <goal>clean</goal>
+                                    <goal>mdj</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>display-mdj-help</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>mdj-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Help</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>help</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>display-mdj-manual</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>mdj-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Manual</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>manual</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>package-manual</id>
+            <activation>
+                <property>
+                    <name>build.profile.id</name>
+                    <value>release-profile</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>mdj-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Compile(release)</id>
+                                <goals>
+                                    <goal>mdj</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>MDj-Package(HTML)</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <jarSrcDir>target/docs</jarSrcDir>
+                                    <jarFilename>${project.build.finalName}-manual.jar</jarFilename>
+                                    <docRootDir>src/docs</docRootDir>
+                                    <verbosity>1</verbosity>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>MDj-Package(SRC)</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <jarSrcDir>src/docs</jarSrcDir>
+                                    <jarFilename>${project.build.finalName}-manual-src.jar</jarFilename>
+                                    <docRootDir>src/docs</docRootDir>
+                                    <verbosity></verbosity>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>increment-build</id>
             <build>
@@ -312,7 +459,13 @@
                     <groupId>com.bew.mojo</groupId>
                     <artifactId>simple-buildnumber-maven-plugin</artifactId>
                     <version>1.0.15</version>
+                </plugin>                
+                <plugin>
+                    <groupId>com.bewsoftware.mojo</groupId>
+                    <artifactId>mdj-maven-plugin</artifactId>
+                    <version>${project.version}</version>
                 </plugin>
+
             </plugins>
         </pluginManagement>
 
