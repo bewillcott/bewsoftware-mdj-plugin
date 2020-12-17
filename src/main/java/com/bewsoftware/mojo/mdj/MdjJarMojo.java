@@ -186,7 +186,7 @@ public class MdjJarMojo extends AbstractMojo {
         {
             int exitcode = Main.execute(args.toArray(new String[args.size()]));
             log.info("Exit: " + exitcode);
-        } catch (IOException | IniFileFormatException | URISyntaxException | InterruptedException ex)
+        } catch (IOException | IniFileFormatException | URISyntaxException ex)
         {
             log.error(MdjJarMojo.class.getName(), ex);
             throw new MojoExecutionException("MDj CLI threw an exception:", ex);

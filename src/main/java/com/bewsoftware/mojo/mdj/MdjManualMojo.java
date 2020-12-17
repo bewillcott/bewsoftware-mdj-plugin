@@ -28,6 +28,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 
+import static org.apache.maven.plugins.annotations.LifecyclePhase.INITIALIZE;
 import static org.apache.maven.plugins.annotations.LifecyclePhase.NONE;
 
 /**
@@ -66,7 +67,7 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.NONE;
  *             &lt;version&gt;1.0.7&lt;/version&gt;
  *             &lt;executions&gt;
  *                 &lt;execution&gt;
- *                     &lt;phase&gt;validate&lt;/phase&gt;
+ *                     &lt;id&gt;MDj-Manual&lt;/id&gt;
  *                     &lt;goals&gt;
  *                         &lt;goal&gt;manual&lt;/goal&gt;
  *                     &lt;/goals&gt;
@@ -80,15 +81,14 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.NONE;
  *&lt;/project&gt;
  * </code></pre>
  * I suggest that putting it into a separate profile would be a good idea,
- * so it only runs when you need it to. Also, you <b>must</b> set the &lt;phase&gt;&lt;/phase&gt;
- * attribute, as there is no default phase for this goal.
+ * so it only runs when you need it to.
  *
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
  * @since 1.0
  * @version 1.0
  */
-@Mojo(name = "manual", defaultPhase = NONE)
+@Mojo(name = "manual", defaultPhase = INITIALIZE)
 public class MdjManualMojo extends AbstractMojo {
 
     /**
@@ -114,7 +114,7 @@ public class MdjManualMojo extends AbstractMojo {
         {
             int exitcode = Main.execute(args.toArray(new String[args.size()]));
             log.info("Exit: " + exitcode);
-        } catch (IOException | IniFileFormatException | URISyntaxException | InterruptedException ex)
+        } catch (IOException | IniFileFormatException | URISyntaxException ex)
         {
             log.error(MdjJarMojo.class.getName(), ex);
             throw new MojoExecutionException("MDj CLI threw an exception:", ex);

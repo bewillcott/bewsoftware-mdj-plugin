@@ -22,7 +22,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugin.logging.Log;
 
-import static org.apache.maven.plugins.annotations.LifecyclePhase.PROCESS_CLASSES;
+import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOURCES;
 
 /**
  * MdjMojo class executes the underlying program, causing it to process
@@ -70,7 +70,7 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PROCESS_CLASSE
  * @since 0.1
  * @version 0.1
  */
-@Mojo(name = "mdj", defaultPhase = PROCESS_CLASSES)
+@Mojo(name = "mdj", defaultPhase = GENERATE_RESOURCES)
 public class MdjMojo extends AbstractMojo {
 
     /**
@@ -185,8 +185,7 @@ public class MdjMojo extends AbstractMojo {
 
             log.info("Exit: " + exitcode);
         } catch (IOException | InvalidParameterValueException
-                 | IniFileFormatException | InvalidProgramStateException
-                 | URISyntaxException | InterruptedException ex)
+                 | IniFileFormatException | InvalidProgramStateException | URISyntaxException ex)
         {
             Logger.getLogger(MdjMojo.class.getName()).log(Level.SEVERE, null, ex);
         }
