@@ -31,7 +31,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 import static java.nio.file.Path.of;
-import static org.apache.maven.plugins.annotations.LifecyclePhase.CLEAN;
 import static org.apache.maven.plugins.annotations.LifecyclePhase.INITIALIZE;
 
 /**
@@ -44,22 +43,23 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.INITIALIZE;
  *  ...
  *  &lt;build&gt;
  *    &lt;plugins&gt;
- *      &lt;plugin&gt;
- *          &lt;plugin&gt;
- *             &lt;groupId&gt;com.bewsoftware.mojo&lt;/groupId&gt;
- *             &lt;artifactId&gt;mdj-maven-plugin&lt;/artifactId&gt;
- *             &lt;version&gt;1.0.7&lt;/version&gt;
- *             &lt;executions&gt;
- *                 &lt;execution&gt;
- *                     &lt;id&gt;MDj-Clean&lt;/id&gt;
- *                     &lt;goals&gt;
- *                         &lt;goal&gt;clean&lt;/goal&gt;
- *                     &lt;/goals&gt;
- *                 &lt;/execution&gt;
- *             &lt;/executions&gt;
- *         &lt;/plugin&gt;
- *         ...
- *      &lt;/plugin&gt;
+ *       &lt;plugin&gt;
+ *          &lt;groupId&gt;com.bewsoftware.mojo&lt;/groupId&gt;
+ *          &lt;artifactId&gt;mdj-maven-plugin&lt;/artifactId&gt;
+ *          &lt;version&gt;1.0.0&lt;/version&gt;
+ *          &lt;executions&gt;
+ *            &lt;execution&gt;
+ *              &lt;id&gt;MDj-Clean&lt;/id&gt;
+ *              &lt;goals&gt;
+ *                &lt;goal&gt;clean&lt;/goal&gt;
+ *              &lt;/goals&gt;
+ *              &lt;configuration&gt;
+ *                &lt;destination&gt;target/docs/manual&lt;/destination&gt;
+ *              &lt;/configuration&gt;
+ *            &lt;/execution&gt;
+ *          &lt;/executions&gt;
+ *       &lt;/plugin&gt;
+ *       ...
  *    &lt;/plugins&gt;
  *  &lt;/build&gt;
  *&lt;/project&gt;

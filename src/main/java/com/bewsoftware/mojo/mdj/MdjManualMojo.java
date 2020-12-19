@@ -60,22 +60,20 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.NONE;
  *  ...
  *  &lt;build&gt;
  *    &lt;plugins&gt;
- *      &lt;plugin&gt;
- *          &lt;plugin&gt;
- *             &lt;groupId&gt;com.bewsoftware.mojo&lt;/groupId&gt;
- *             &lt;artifactId&gt;mdj-maven-plugin&lt;/artifactId&gt;
- *             &lt;version&gt;1.0.7&lt;/version&gt;
- *             &lt;executions&gt;
- *                 &lt;execution&gt;
- *                     &lt;id&gt;MDj-Manual&lt;/id&gt;
- *                     &lt;goals&gt;
- *                         &lt;goal&gt;manual&lt;/goal&gt;
- *                     &lt;/goals&gt;
- *                 &lt;/execution&gt;
- *             &lt;/executions&gt;
- *         &lt;/plugin&gt;
- *         ...
- *      &lt;/plugin&gt;
+ *       &lt;plugin&gt;
+ *          &lt;groupId&gt;com.bewsoftware.mojo&lt;/groupId&gt;
+ *          &lt;artifactId&gt;mdj-maven-plugin&lt;/artifactId&gt;
+ *          &lt;version&gt;1.0.0&lt;/version&gt;
+ *          &lt;executions&gt;
+ *            &lt;execution&gt;
+ *              &lt;id&gt;MDj-Manual&lt;/id&gt;
+ *              &lt;goals&gt;
+ *                &lt;goal&gt;manual&lt;/goal&gt;
+ *              &lt;/goals&gt;
+ *            &lt;/execution&gt;
+ *          &lt;/executions&gt;
+ *       &lt;/plugin&gt;
+ *       ...
  *    &lt;/plugins&gt;
  *  &lt;/build&gt;
  *&lt;/project&gt;

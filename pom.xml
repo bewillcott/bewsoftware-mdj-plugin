@@ -3,19 +3,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.bewsoftware.mojo</groupId>
-    <artifactId>mdj-maven-plugin</artifactId>
-    <version>0.24.3</version>
+    <artifactId>bewsoftware-mdj-plugin</artifactId>
+    <version>0.27.5</version>
     <packaging>maven-plugin</packaging>
 
-    <name>MDj Maven Plugin</name>
-    <description>This plugin is a wrapper for the MDj-Cli program which processes markdown files into html files.</description>
+    <name>BEWSoftware MDj Maven Plugin</name>
+    <description>This plugin is a wrapper for the BEWSoftware MDj-Cli program which processes markdown files into html files.</description>
 
     <prerequisites>
         <maven>3.5</maven>
     </prerequisites>
 
     <properties>
-        <major.minor.version>0.24</major.minor.version>
+        <major.minor.version>0.27</major.minor.version>
         <maven.version>3.6.3</maven.version>
         <java.version>12</java.version>
         <source.encoding>UTF-8</source.encoding>
@@ -106,8 +106,8 @@
         </dependency>
         <dependency>
             <groupId>com.bewsoftware</groupId>
-            <artifactId>mdj-cli</artifactId>
-            <version>1.0.26</version>
+            <artifactId>bewsoftware-mdj-cli</artifactId>
+            <version>1.0.27</version>
             <type>jar</type>
         </dependency>
     </dependencies>
@@ -119,7 +119,7 @@
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Clean</id>
@@ -138,7 +138,7 @@
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Compile(interim)</id>
@@ -157,7 +157,7 @@
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Clean-Compile</id>
@@ -177,7 +177,7 @@
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Help</id>
@@ -197,11 +197,10 @@
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Manual</id>
-                                <phase>initialize</phase>
                                 <goals>
                                     <goal>manual</goal>
                                 </goals>
@@ -213,17 +212,11 @@
         </profile>
         <profile>
             <id>package-manual</id>
-            <activation>
-                <property>
-                    <name>build.profile.id</name>
-                    <value>release-profile</value>
-                </property>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Compile(release)</id>
@@ -240,7 +233,7 @@
                                     <jarSrcDir>target/docs</jarSrcDir>
                                     <jarFilename>${project.build.finalName}-manual.jar</jarFilename>
                                     <docRootDir>src/docs</docRootDir>
-                                    <verbosity>1</verbosity>
+                                    <verbosity></verbosity>
                                 </configuration>
                             </execution>
                             <execution>
@@ -382,6 +375,16 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>com.bewsoftware.mojo</groupId>
+                    <artifactId>bewsoftware-mdj-plugin</artifactId>
+                    <version>${project.version}</version>
+                </plugin>
+                <plugin>                        
+                    <groupId>com.bew.mojo</groupId>
+                    <artifactId>simple-buildnumber-maven-plugin</artifactId>
+                    <version>1.0.15</version>
+                </plugin>                
+                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
                     <version>3.2.0</version>
@@ -454,16 +457,6 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0-M5</version>
-                </plugin>
-                <plugin>                        
-                    <groupId>com.bew.mojo</groupId>
-                    <artifactId>simple-buildnumber-maven-plugin</artifactId>
-                    <version>1.0.15</version>
-                </plugin>                
-                <plugin>
-                    <groupId>com.bewsoftware.mojo</groupId>
-                    <artifactId>mdj-maven-plugin</artifactId>
-                    <version>${project.version}</version>
                 </plugin>
 
             </plugins>

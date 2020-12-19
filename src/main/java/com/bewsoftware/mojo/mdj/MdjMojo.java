@@ -43,21 +43,25 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOU
  *  ...
  *  &lt;build&gt;
  *    &lt;plugins&gt;
- *      &lt;plugin&gt;
- *          &lt;plugin&gt;
- *             &lt;groupId&gt;com.bewsoftware.mojo&lt;/groupId&gt;
- *             &lt;artifactId&gt;mdj-maven-plugin&lt;/artifactId&gt;
- *             &lt;version&gt;1.0.7&lt;/version&gt;
- *             &lt;executions&gt;
- *                 &lt;execution&gt;
- *                     &lt;goals&gt;
- *                         &lt;goal&gt;mdj&lt;/goal&gt;
- *                     &lt;/goals&gt;
- *                 &lt;/execution&gt;
- *             &lt;/executions&gt;
- *         &lt;/plugin&gt;
- *         ...
- *      &lt;/plugin&gt;
+ *       &lt;plugin&gt;
+ *          &lt;groupId&gt;com.bewsoftware.mojo&lt;/groupId&gt;
+ *          &lt;artifactId&gt;mdj-maven-plugin&lt;/artifactId&gt;
+ *          &lt;version&gt;1.0.0&lt;/version&gt;
+ *          &lt;executions&gt;
+ *            &lt;execution&gt;
+ *              &lt;id&gt;MDj-Compile&lt;/id&gt;
+ *              &lt;goals&gt;
+ *                &lt;goal&gt;mdj&lt;/goal&gt;
+ *              &lt;/goals&gt;
+ *              &lt;configuration&gt;
+ *                &lt;source&gt;src/docs/manual&lt;/source&gt;
+ *                &lt;destination&gt;target/docs/manual&lt;/destination&gt;
+ *                &lt;verbosity&gt;1&lt;/verbosity&gt;
+ *              &lt;/configuration&gt;
+ *            &lt;/execution&gt;
+ *          &lt;/executions&gt;
+ *       &lt;/plugin&gt;
+ *       ...
  *    &lt;/plugins&gt;
  *  &lt;/build&gt;
  *&lt;/project&gt;
