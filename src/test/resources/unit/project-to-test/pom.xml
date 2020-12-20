@@ -19,8 +19,8 @@
             <plugins>
                 <plugin>
                     <groupId>com.bewsoftware.mojo</groupId>
-                    <artifactId>mdj-maven-plugin</artifactId>
-                    <version>0.24.3-SNAPSHOT</version>
+                    <artifactId>bewsoftware-mdj-plugin</artifactId>
+                    <version>0.29.7</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -61,7 +61,7 @@
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Clean</id>
@@ -80,7 +80,7 @@
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Compile(interim)</id>
@@ -99,7 +99,7 @@
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Clean-Compile</id>
@@ -114,12 +114,32 @@
             </build>
         </profile>
         <profile>
+            <id>display-mdj-help</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Help</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>help</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>display-mdj-manual</id>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Manual</id>
@@ -139,7 +159,7 @@
                 <plugins>
                     <plugin>
                         <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>mdj-maven-plugin</artifactId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>MDj-Compile(release)</id>
@@ -156,7 +176,7 @@
                                     <jarSrcDir>target/docs</jarSrcDir>
                                     <jarFilename>${project.build.finalName}-manual.jar</jarFilename>
                                     <docRootDir>src/docs</docRootDir>
-                                    <verbosity>3</verbosity>
+                                    <verbosity>1</verbosity>
                                 </configuration>
                             </execution>
                             <execution>
@@ -168,7 +188,7 @@
                                     <jarSrcDir>src/docs</jarSrcDir>
                                     <jarFilename>${project.build.finalName}-manual-src.jar</jarFilename>
                                     <docRootDir>src/docs</docRootDir>
-                                    <verbosity>0</verbosity>
+                                    <verbosity></verbosity>
                                 </configuration>
                             </execution>
                         </executions>
