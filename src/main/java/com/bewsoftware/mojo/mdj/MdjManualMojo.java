@@ -27,9 +27,9 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import static org.apache.maven.plugins.annotations.LifecyclePhase.INITIALIZE;
-import static org.apache.maven.plugins.annotations.LifecyclePhase.NONE;
 
 /**
  * MdjManualMojo class executes the underlying program, causing it to
@@ -78,13 +78,13 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.NONE;
  *  &lt;/build&gt;
  *&lt;/project&gt;
  * </code></pre>
- * I suggest that putting it into a separate profile would be a good idea,
+ * I suggest that putting the plugin into a separate profile would be a good idea,
  * so it only runs when you need it to.
  *
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
- * @since 1.0
- * @version 1.0
+ * @since 0.1
+ * @version 0.29.9
  */
 @Mojo(name = "manual", defaultPhase = INITIALIZE)
 public class MdjManualMojo extends AbstractMojo {
