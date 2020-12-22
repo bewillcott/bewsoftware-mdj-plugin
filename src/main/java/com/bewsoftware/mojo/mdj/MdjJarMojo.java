@@ -74,7 +74,7 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PACKAGE;
  *  &lt;/build&gt;
  *&lt;/project&gt;
  * </code></pre>
- * I suggest that putting it into a separate profile would be a good idea,
+ * I suggest that putting the plugin into a separate profile would be a good idea,
  * so it only runs when you need it to.
  *
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>

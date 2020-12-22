@@ -4,7 +4,7 @@
 
     <groupId>com.bewsoftware.mojo</groupId>
     <artifactId>bewsoftware-mdj-plugin</artifactId>
-    <version>0.29.7</version>
+    <version>1.0.30</version>
     <packaging>maven-plugin</packaging>
 
     <name>BEWSoftware MDj Maven Plugin</name>
@@ -15,7 +15,8 @@
     </prerequisites>
 
     <properties>
-        <major.minor.version>0.29</major.minor.version>
+        <!-- This setting must be the version of "bewsoftware-mdj-cli" that is a dependency -->
+        <major.minor.version>1.0.30</major.minor.version>
         <maven.version>3.6.3</maven.version>
         <java.version>12</java.version>
         <source.encoding>UTF-8</source.encoding>
@@ -58,7 +59,7 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.6.3</version>
+            <version>${maven.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -90,7 +91,7 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-artifact</artifactId>
-            <version>3.6.3</version>
+            <version>${maven.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -107,7 +108,7 @@
         <dependency>
             <groupId>com.bewsoftware</groupId>
             <artifactId>bewsoftware-mdj-cli</artifactId>
-            <version>1.0.29</version>
+            <version>${major.minor.version}</version>
         </dependency>
     </dependencies>
 
@@ -210,6 +211,97 @@
             </build>
         </profile>
         <profile>
+            <id>publish-all</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Publish-Manual</id>
+                                <goals>
+                                    <goal>mdj</goal>                                    
+                                    <goal>publish</goal>
+                                </goals>
+                                <configuration>
+                                    <serverContexts>
+                                        <serverContext>
+                                            <context>/</context>
+                                            <htmlSource>target/docs</htmlSource>
+                                        </serverContext>
+                                        <serverContext>
+                                            <context>/site</context>
+                                            <htmlSource>target/site</htmlSource>
+                                        </serverContext>
+                                        <serverContext>
+                                            <context>/api</context>
+                                            <htmlSource>target/${project.build.finalName}-javadoc.jar</htmlSource>
+                                        </serverContext>
+                                    </serverContexts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>publish-manual</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Publish-Manual</id>
+                                <goals>
+                                    <goal>mdj</goal>                                    
+                                    <goal>publish</goal>
+                                </goals>
+                                <configuration>
+                                    <serverContexts>
+                                        <serverContext>
+                                            <context>/</context>
+                                            <htmlSource>target/docs</htmlSource>
+                                        </serverContext>
+                                    </serverContexts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>publish-api</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Publish-API</id>
+                                <goals>
+                                    <goal>publish</goal>
+                                </goals>
+                                <configuration>
+                                    <serverContexts>
+                                        <serverContext>
+                                            <context>/api</context>
+                                            <htmlSource>target/${project.build.finalName}-javadoc.jar</htmlSource>
+                                        </serverContext>
+                                    </serverContexts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+<!--        <profile>
             <id>package-manual</id>
             <build>
                 <plugins>
@@ -251,7 +343,7 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile>-->
         <profile>
             <id>increment-build</id>
             <build>
@@ -322,7 +414,44 @@
         <profile>
             <id>release-profile</id>
             <build>
-                <plugins>
+                <plugins>                    
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Compile(release)</id>
+                                <goals>
+                                    <goal>mdj</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>MDj-Package(HTML)</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <jarSrcDir>target/docs</jarSrcDir>
+                                    <jarFilename>${project.build.finalName}-manual.jar</jarFilename>
+                                    <docRootDir>src/docs</docRootDir>
+                                    <verbosity></verbosity>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>MDj-Package(SRC)</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <jarSrcDir>src/docs</jarSrcDir>
+                                    <jarFilename>${project.build.finalName}-manual-src.jar</jarFilename>
+                                    <docRootDir>src/docs</docRootDir>
+                                    <verbosity></verbosity>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
                     <plugin>                
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-site-plugin</artifactId>
@@ -493,19 +622,17 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
                 <configuration>
-                    <port>9000</port>
-                    <tempWebappDirectory>${basedir}/target/site/tempdir</tempWebappDirectory>
+                    <level>private</level>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
                 <configuration>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
