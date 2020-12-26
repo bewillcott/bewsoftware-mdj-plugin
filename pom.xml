@@ -4,7 +4,7 @@
 
     <groupId>com.bewsoftware.mojo</groupId>
     <artifactId>bewsoftware-mdj-plugin</artifactId>
-    <version>1.0.30</version>
+    <version>1.0.33</version>
     <packaging>maven-plugin</packaging>
 
     <name>BEWSoftware MDj Maven Plugin</name>
@@ -16,7 +16,9 @@
 
     <properties>
         <!-- This setting must be the version of "bewsoftware-mdj-cli" that is a dependency -->
-        <major.minor.version>1.0.30</major.minor.version>
+        <mdj.cli.version>1.0.33</mdj.cli.version>
+        <major.minor.version>1.0.33</major.minor.version>
+        
         <maven.version>3.6.3</maven.version>
         <java.version>12</java.version>
         <source.encoding>UTF-8</source.encoding>
@@ -108,7 +110,7 @@
         <dependency>
             <groupId>com.bewsoftware</groupId>
             <artifactId>bewsoftware-mdj-cli</artifactId>
-            <version>${major.minor.version}</version>
+            <version>${mdj.cli.version}</version>
         </dependency>
     </dependencies>
 
@@ -301,7 +303,7 @@
                 </plugins>
             </build>
         </profile>
-<!--        <profile>
+        <!--        <profile>
             <id>package-manual</id>
             <build>
                 <plugins>
@@ -452,6 +454,71 @@
                         </executions>
                     </plugin>
 
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>Zip Binary Jar and libs</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>zip</executable>
+                                    <workingDirectory>${project.build.directory}</workingDirectory>
+                                    <includeProjectDependencies>false</includeProjectDependencies>
+                                    <includePluginDependencies>true</includePluginDependencies>
+                                    <arguments>
+                                        <!--<argument>-r</argument>-->
+                                        <argument>${project.build.finalName}.zip</argument>
+                                        <argument>${project.build.finalName}.jar</argument>
+                                        <argument>${project.build.finalName}-manual.jar</argument>
+                                        <argument>${project.build.finalName}-manual-src.jar</argument>
+                                        <!--<argument>libs</argument>-->
+                                    </arguments> 
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-install-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>manual</id>                                    
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>install-file</goal>
+                                </goals>
+                                <configuration>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.artifact.version}</version>
+                                    <classifier>manual</classifier>
+                                    <packaging>jar</packaging>
+                                    <file>${project.build.directory}/${project.build.finalName}-manual.jar</file>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>manual-src</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>install-file</goal>
+                                </goals>
+                                <configuration>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.artifact.version}</version>
+                                    <classifier>manual-src</classifier>
+                                    <packaging>jar</packaging>
+                                    <file>${project.build.directory}/${project.build.finalName}-manual-src.jar</file>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>          
+
                     <plugin>                
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-site-plugin</artifactId>
@@ -521,7 +588,13 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.8.6</version>
+                </plugin>                
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.0.0</version>
                 </plugin>
+
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.1.0</version>
