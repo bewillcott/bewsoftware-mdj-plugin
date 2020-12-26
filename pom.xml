@@ -8,7 +8,7 @@
     <packaging>maven-plugin</packaging>
 
     <name>BEWSoftware MDj Maven Plugin</name>
-    <description>This plugin is a wrapper for the BEWSoftware MDj-Cli program which processes markdown files into html files.</description>
+    <description>This plugin is a wrapper for the BEWSoftware MDj Cli program which processes markdown files into html files.</description>
 
     <prerequisites>
         <maven>3.5</maven>
