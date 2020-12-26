@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>com.bewsoftware.unit.test</groupId>
-    <artifactId>project-to-test</artifactId>
+    <artifactId>mdj-plugin-test</artifactId>
     <packaging>jar</packaging>
     <version>0.1.2-SNAPSHOT</version>
     
-    <name>My test project</name>
+    <name>BEWSoftware MDJ Plugin test project</name>
     
     <properties>
         <maven.compiler.source>12</maven.compiler.source>
