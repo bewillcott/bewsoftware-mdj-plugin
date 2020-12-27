@@ -263,6 +263,7 @@
                                     <goal>publish</goal>
                                 </goals>
                                 <configuration>
+                                    
                                     <serverContexts>
                                         <serverContext>
                                             <context>/</context>
@@ -547,6 +548,16 @@
         <resources>
             <resource>
                 <directory>
+                    docs
+                </directory>
+                <excludes>
+                    <exclude>
+                        **/*
+                    </exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>
                     src/docs
                 </directory>
                 <excludes>
@@ -710,7 +721,33 @@
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
-        </plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>${source.encoding}</encoding>
+                </configuration>
+                <executions>
+                    <execution>                        
+                        <id>Copy-Manual-to-basedir</id>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <outputDirectory>docs</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>
+                                        target/docs
+                                    </directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+          </plugins>
     </build>
 
     <reporting>
