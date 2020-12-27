@@ -124,7 +124,6 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PROCESS_RESOUR
  *                  &lt;/serverContext&gt;
  *                &lt;/serverContexts&gt;
  *              &lt;/configuration&gt;
- *              &lt;/configuration&gt;
  *            &lt;/execution&gt;
  *          &lt;/executions&gt;
  *       &lt;/plugin&gt;
@@ -150,39 +149,48 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PROCESS_RESOUR
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
  * @since 0.1.7
- * @version 1.0.30
+ * @version 1.0.33
  */
 @Mojo(name = "publish", defaultPhase = PROCESS_RESOURCES)
 public class MdjPublishMojo extends AbstractMojo {
 
     /**
-     * Allow the generation and display of directory listings.
+     * Allow a directory listing to be generated, if no 'index' file found.
      */
     @Parameter(defaultValue = "false")
     private boolean allowGeneratedIndex;
 
     /**
-     * List of ServerConfiguration objects.
-     * <p>
-     * Add:
-     * <pre><code>
-     *  &lt;serverContexts&gt;
-     *    &lt;serverContext&gt;
-     *     &lt;context&gt;/&lt;/context&gt;
-     *     &lt;htmlSource&gt;target/docs&lt;/htmlSource&gt;
-     *   &lt;/serverContext&gt;
-     *  &lt;/serverContexts&gt;
-     * </code></pre>
-     * with your specific settings.
+     * Disallow web browsers caching the files sent by this instance of the web server.
      */
-    @Parameter()
-    private List<ServerContext> serverContexts;
+    @Parameter(defaultValue = "false")
+    private boolean disallowBrowserFileCaching;
 
     /**
      * Define a static logger variable so that it references the
      * Logger instance named "CreateXMLMojoTest".
      */
     private final Log log = getLog();
+
+    /**
+     * List of ServerContext objects.
+     * <p>
+     * Add:
+     * <pre><code>
+     *  &lt;serverContexts&gt;
+     *    &lt;serverContext&gt;
+     *     &lt;context&gt;/&lt;/context&gt;
+     *     &lt;htmlSource&gt;&lt;/htmlSource&gt;
+     *   &lt;/serverContext&gt;
+     *  &lt;/serverContexts&gt;
+     * </code></pre>
+     * with your specific settings.
+     * <p>
+     * What is shown above is the default, should you <i>not</i> include a
+     * {@code <serverContexts>} entry.
+     */
+    @Parameter()
+    private List<ServerContext> serverContexts;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -195,6 +203,11 @@ public class MdjPublishMojo extends AbstractMojo {
         if (allowGeneratedIndex)
         {
             args.add("--allowGeneratedIndex");
+        }
+
+        if (disallowBrowserFileCaching)
+        {
+            args.add("--disallowBrowserFileCaching");
         }
 
         if (serverContexts != null && !serverContexts.isEmpty())

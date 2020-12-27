@@ -1,12 +1,12 @@
 # BEWSoftware MDj Plugin
 
-This plugin is a wrapper for the BEWSoftware MDj Cli program which processes 
-markdown files into html files.
+This plugin is a wrapper for the BEWSoftware MDj CLI program which processes 
+Markdown files into HTML files.
 
 This plugin has six goals:
 
 - <b>clean</b>:  
-Delete the &lt;destination&gt; directory (default: "target/docs").
+Deletes the &lt;destination&gt; directory (default: "target/docs").
 
 - <b>help</b>:  
 Auto generated during build.
@@ -25,10 +25,10 @@ Processes the markdown files from the &lt;source&gt; directory (default: "src/do
 into static html files in the &lt;destination&gt; directory (default: "target/docs").  
 
 - <b>publish</b>:  
-Launches the internal HTTP Server to publish the static html files from the 
+Launches the internal HTTP Server to publish the static HTML files from the 
 &lt;htmlSource&gt; in the context: &lt;context&gt;.  The source can be either 
 a directory accessible from the local system, or a 'jar' file that contains static
-html files.
+HTML files.
 
 ## Status
 This plugin is fully functional.  However, I am still testing it.  You are welcome to

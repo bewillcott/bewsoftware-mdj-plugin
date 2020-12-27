@@ -4,10 +4,10 @@ title: ${document.name} | About
 @@@
 
 
-## About
+## About - v${document.version}
 
     BEWSoftware MDj Maven Plugin is a wrapper Maven plugin for the
-    BEWSoftware MDj Cli program.
+    BEWSoftware MDj CLI program.
 
     Copyright (C) 2020 Bradley Willcott
 
@@ -27,44 +27,41 @@ title: ${document.name} | About
 This plugin came about as a result of my desire to fully automate the creation
 of my program documentation. 
 
-First, I found, updated and enhanced a fork of the [Markdownj library][1], 
-now my own [BEWSoftware MDj Core Library][2], then I developed a command-line
-program to use it: [BEWSoftware MDj Cli][3].
----
+First, I found, updated and enhanced a fork of the [Markdownj library][markdownj]![@externalLink].
+This modified code is now my own [BEWSoftware MDj Core Library][mjc]![@externalLink].
+Then I developed a command-line program to use it: [BEWSoftware MDj CLI][mc]![@externalLink].
 
-1.[#fn1] [Markdownj on GitHub][markdownj]![@externalLink]  
-2.[#fn2] [BEWSoftware MDj Core Library on GitHub][mjc]![@externalLink]  
-3.[#fn3] [BEWSoftware MDj Cli on GitHub][mc]![@externalLink]  
+The next logical step was to develop a Maven Plugin.  The BEWSoftware MDj Maven Plugin
+is one possible implementation of that requirement.
 
 
-[1]:#fn1 "Original source on Github"
-[2]:#fn2 "MDj Core"
-[3]:#fn3 "MDj Cli"
-[markdownj]:https://github.com/myabc/markdownj
-[mjc]:https://github.com/bewillcott/bewsoftware-mdj
-[mc]:https://github.com/bewillcott/bewsoftware-mdj-cli
+
+[markdownj]:https://github.com/myabc/markdownj "Original source on Github"
+[mjc]:https://github.com/bewillcott/bewsoftware-mdj "Source on Github"
+[mc]:https://github.com/bewillcott/bewsoftware-mdj-cli "Source on Github"
+
 
 @@@[navbar]
 - [Home]
-- [Clean]
-- [Help]
-- [Jar]
-- [Manual]
-- [Mdj]
-- [Publish]
+- [clean]
+- [help]
+- [jar]
+- [manual]
+- [mdj]
+- [publish]
 - [@right dropdown active] [About](#)
 [@dropdown-content]
     - [ToDo List]
     - [License]
 
 [About]:About.html
-[Clean]:Clean.html
-[Help]:Help.html
+[clean]:Clean.html
+[help]:Help.html
 [Home]:index.html
-[Jar]:Jar.html
+[jar]:Jar.html
 [License]:LICENSE.html
-[Manual]:Manual.html
-[Mdj]:Mdj.html
-[Publish]:Publish.html
+[manual]:Manual.html
+[mdj]:Mdj.html
+[publish]:Publish.html
 [ToDo List]:ToDo.html
 @@@
