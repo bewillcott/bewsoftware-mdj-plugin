@@ -147,6 +147,9 @@
                                 <goals>
                                     <goal>mdj</goal>
                                 </goals>
+                                <configuration>
+                                    <verbosity></verbosity>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -227,6 +230,7 @@
                                     <goal>publish</goal>
                                 </goals>
                                 <configuration>
+                                    <disallowBrowserFileCaching>true</disallowBrowserFileCaching>
                                     <serverContexts>
                                         <serverContext>
                                             <context>/</context>
@@ -263,7 +267,7 @@
                                     <goal>publish</goal>
                                 </goals>
                                 <configuration>
-                                    
+                                    <disallowBrowserFileCaching>true</disallowBrowserFileCaching>
                                     <serverContexts>
                                         <serverContext>
                                             <context>/</context>
@@ -291,6 +295,7 @@
                                     <goal>publish</goal>
                                 </goals>
                                 <configuration>
+                                    <disallowBrowserFileCaching>true</disallowBrowserFileCaching>
                                     <serverContexts>
                                         <serverContext>
                                             <context>/api</context>
@@ -747,7 +752,7 @@
                     </execution>
                 </executions>
             </plugin>
-          </plugins>
+        </plugins>
     </build>
 
     <reporting>
