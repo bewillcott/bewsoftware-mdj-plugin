@@ -4,7 +4,7 @@
 
     <groupId>com.bewsoftware.mojo</groupId>
     <artifactId>bewsoftware-mdj-plugin</artifactId>
-    <version>1.0.33</version>
+    <version>1.0.34-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>BEWSoftware MDj Maven Plugin</name>
@@ -16,8 +16,8 @@
 
     <properties>
         <!-- This setting must be the version of "bewsoftware-mdj-cli" that is a dependency -->
-        <mdj.cli.version>1.0.33</mdj.cli.version>
-        <major.minor.version>1.0.33</major.minor.version>
+        <mdj.cli.version>1.0.34-SNAPSHOT</mdj.cli.version>
+        <major.minor.version>1.0.34</major.minor.version>
         
         <maven.version>3.6.3</maven.version>
         <java.version>12</java.version>
