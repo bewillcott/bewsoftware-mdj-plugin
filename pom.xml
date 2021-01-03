@@ -4,7 +4,7 @@
 
     <groupId>com.bewsoftware.mojo</groupId>
     <artifactId>bewsoftware-mdj-plugin</artifactId>
-    <version>1.0.33</version>
+    <version>1.0.34</version>
     <packaging>maven-plugin</packaging>
 
     <name>BEWSoftware MDj Maven Plugin</name>
@@ -16,8 +16,8 @@
 
     <properties>
         <!-- This setting must be the version of "bewsoftware-mdj-cli" that is a dependency -->
-        <mdj.cli.version>1.0.33</mdj.cli.version>
-        <major.minor.version>1.0.33</major.minor.version>
+        <mdj.cli.version>1.0.34</mdj.cli.version>
+        <major.minor.version>1.0.34</major.minor.version>
         
         <maven.version>3.6.3</maven.version>
         <java.version>12</java.version>
@@ -352,11 +352,11 @@
                 </plugins>
             </build>
         </profile>-->
-        <profile>
+<!--        <profile>
             <id>increment-build</id>
             <build>
                 <plugins>
-                    <!-- Increment {buildNumber} and update the 'pom.xml' file -->
+                     Increment {buildNumber} and update the 'pom.xml' file 
                     <plugin>
                         <groupId>com.bew.mojo</groupId>
                         <artifactId>simple-buildnumber-maven-plugin</artifactId>
@@ -376,7 +376,7 @@
             <id>increment-release</id>
             <build>
                 <plugins>
-                    <!-- Increment {buildNumber}, remove '-SNAPSHOT' and update the 'pom.xml' file -->
+                     Increment {buildNumber}, remove '-SNAPSHOT' and update the 'pom.xml' file 
                     <plugin>
                         <groupId>com.bew.mojo</groupId>
                         <artifactId>simple-buildnumber-maven-plugin</artifactId>
@@ -399,7 +399,7 @@
             <id>release-build</id>
             <build>
                 <plugins>
-                    <!-- Keep current {buildNumber}, remove '-SNAPSHOT' and update the 'pom.xml' file -->
+                     Keep current {buildNumber}, remove '-SNAPSHOT' and update the 'pom.xml' file 
                     <plugin>
                         <groupId>com.bew.mojo</groupId>
                         <artifactId>simple-buildnumber-maven-plugin</artifactId>
@@ -418,7 +418,7 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
+        </profile>-->
         <profile>
             <id>release-profile</id>
             <build>
