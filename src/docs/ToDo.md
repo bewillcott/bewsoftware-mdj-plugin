@@ -7,7 +7,7 @@ title: ${document.name} | ToDo List
 
 Currently there are no items on this list.
 
-@@@[navbar]
+@@@[#navbar]
 - [Home]
 - [clean]
 - [help]

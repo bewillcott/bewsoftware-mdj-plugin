@@ -181,7 +181,7 @@ The HTML source. Either:
 
 
 
-@@@[navbar]
+@@@[#navbar]
 - [Home]
 - [clean]
 - [help]

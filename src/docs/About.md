@@ -41,7 +41,7 @@ is one possible implementation of that requirement.
 [mc]:https://github.com/bewillcott/bewsoftware-mdj-cli "Source on Github"
 
 
-@@@[navbar]
+@@@[#navbar]
 - [Home]
 - [clean]
 - [help]

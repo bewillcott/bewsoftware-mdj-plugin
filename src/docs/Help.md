@@ -43,7 +43,7 @@ so it only runs when you need it to.
 
 
 
-@@@[navbar]
+@@@[#navbar]
 - [Home]
 - [clean]
 - [@active] [help](#)

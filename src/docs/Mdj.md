@@ -94,7 +94,7 @@ Set the level of verbosity.
 [p]:# "The value can be added as a global setting in the <properties> section of your pom.xml file."
 
 
-@@@[navbar]
+@@@[#navbar]
 - [Home]
 - [clean]
 - [help]

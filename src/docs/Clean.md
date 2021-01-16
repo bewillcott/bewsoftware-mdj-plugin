@@ -60,7 +60,7 @@ When setting it, be sure to change the parameter to your output directory.
 [p]:# "This property can be added as a global setting in the <properties> section of your pom.xml file."
 
 
-@@@[navbar]
+@@@[#navbar]
 - [Home]
 - [@active] [clean](#)
 - [help]
