@@ -52,7 +52,7 @@ This plugin requires some other projects, to be able to compile this one:
 [mjc]:https://github.com/bewillcott/bewsoftware-mdj
 [mc]:https://github.com/bewillcott/bewsoftware-mdj-cli
 
-@@@[navbar]
+@@@[#navbar]
 - [@active] [Home](#)
 - [clean]
 - [help]

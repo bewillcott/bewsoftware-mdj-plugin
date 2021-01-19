@@ -4,7 +4,7 @@
 
     <groupId>com.bewsoftware.mojo</groupId>
     <artifactId>bewsoftware-mdj-plugin</artifactId>
-    <version>1.0.35</version>
+    <version>1.0.38</version>
     <packaging>maven-plugin</packaging>
 
     <name>BEWSoftware MDj Maven Plugin</name>
@@ -16,8 +16,7 @@
 
     <properties>
         <!-- This setting must be the version of "bewsoftware-mdj-cli" that is a dependency -->
-        <mdj.cli.version>1.0.35</mdj.cli.version>
-<!--        <major.minor.version>1.0.35</major.minor.version>-->
+        <mdj.cli.version>1.0.38</mdj.cli.version>
         
         <maven.version>3.6.3</maven.version>
         <java.version>12</java.version>
@@ -116,7 +115,7 @@
 
     <profiles>
         <profile>
-            <id>clean-manual</id>
+            <id>manual-clean</id>
             <build>
                 <plugins>
                     <plugin>
@@ -134,8 +133,9 @@
                 </plugins>
             </build>
         </profile>
+        
         <profile>
-            <id>compile-manual</id>
+            <id>manual-compile</id>
             <build>
                 <plugins>
                     <plugin>
@@ -156,8 +156,9 @@
                 </plugins>
             </build>
         </profile>
+        
         <profile>
-            <id>clean-compile-manual</id>
+            <id>manual-clean-compile</id>
             <build>
                 <plugins>
                     <plugin>
@@ -176,6 +177,7 @@
                 </plugins>
             </build>
         </profile>
+        
         <profile>
             <id>display-mdj-help</id>
             <build>
@@ -196,8 +198,9 @@
                 </plugins>
             </build>
         </profile>
+        
         <profile>
-            <id>display-mdj-manual</id>
+            <id>manual-display-mdj</id>
             <build>
                 <plugins>
                     <plugin>
@@ -215,6 +218,7 @@
                 </plugins>
             </build>
         </profile>
+        
         <profile>
             <id>publish-all</id>
             <build>
@@ -252,8 +256,9 @@
                 </plugins>
             </build>
         </profile>
+        
         <profile>
-            <id>publish-manual</id>
+            <id>manual-publish</id>
             <build>
                 <plugins>
                     <plugin>
@@ -281,6 +286,40 @@
                 </plugins>
             </build>
         </profile>
+        
+        <profile>
+            <id>manual-clean-publish</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.bewsoftware.mojo</groupId>
+                        <artifactId>bewsoftware-mdj-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>MDj-Publish-Manual</id>
+                                <goals>
+                                    <goal>clean</goal>
+                                    <goal>mdj</goal>                                    
+                                    <goal>publish</goal>
+                                </goals>
+                                <configuration>                                    
+                                    <disallowBrowserFileCaching>true</disallowBrowserFileCaching>
+                                    <source>src/docs/manual</source>
+                                    <destination>target/docs/manual</destination>
+                                    <serverContexts>
+                                        <serverContext>
+                                            <context>/</context>
+                                            <htmlSource>target/docs/manual</htmlSource>
+                                        </serverContext>
+                                    </serverContexts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        
         <profile>
             <id>publish-api</id>
             <build>
@@ -309,116 +348,7 @@
                 </plugins>
             </build>
         </profile>
-        <!--        <profile>
-            <id>package-manual</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.bewsoftware.mojo</groupId>
-                        <artifactId>bewsoftware-mdj-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>MDj-Compile(release)</id>
-                                <goals>
-                                    <goal>mdj</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>MDj-Package(HTML)</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                                <configuration>
-                                    <jarSrcDir>target/docs</jarSrcDir>
-                                    <jarFilename>${project.build.finalName}-manual.jar</jarFilename>
-                                    <docRootDir>src/docs</docRootDir>
-                                    <verbosity></verbosity>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>MDj-Package(SRC)</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                                <configuration>
-                                    <jarSrcDir>src/docs</jarSrcDir>
-                                    <jarFilename>${project.build.finalName}-manual-src.jar</jarFilename>
-                                    <docRootDir>src/docs</docRootDir>
-                                    <verbosity></verbosity>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>-->
-<!--        <profile>
-            <id>increment-build</id>
-            <build>
-                <plugins>
-                     Increment {buildNumber} and update the 'pom.xml' file 
-                    <plugin>
-                        <groupId>com.bew.mojo</groupId>
-                        <artifactId>simple-buildnumber-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>Increment Build</id>
-                                <goals>
-                                    <goal>create-xml</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>increment-release</id>
-            <build>
-                <plugins>
-                     Increment {buildNumber}, remove '-SNAPSHOT' and update the 'pom.xml' file 
-                    <plugin>
-                        <groupId>com.bew.mojo</groupId>
-                        <artifactId>simple-buildnumber-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>Increment Release</id>
-                                <goals>
-                                    <goal>create-xml</goal>
-                                </goals>
-                                <configuration>
-                                    <release>true</release>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>release-build</id>
-            <build>
-                <plugins>
-                     Keep current {buildNumber}, remove '-SNAPSHOT' and update the 'pom.xml' file 
-                    <plugin>
-                        <groupId>com.bew.mojo</groupId>
-                        <artifactId>simple-buildnumber-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>Release</id>
-                                <goals>
-                                    <goal>create-xml</goal>
-                                </goals>
-                                <configuration>
-                                    <release>true</release>
-                                    <keepNumber>true</keepNumber>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>-->
+        
         <profile>
             <id>release-profile</id>
             <build>
@@ -541,6 +471,7 @@
                 </plugins>
             </build>
         </profile>
+        
         <profile>
             <id>test</id>
             <properties>

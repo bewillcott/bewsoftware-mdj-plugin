@@ -122,7 +122,7 @@ Set the level of verbosity.
 [src]:Mdj.html#src "mdj - source."
 
 
-@@@[navbar]
+@@@[#navbar]
 - [Home]
 - [clean]
 - [help]
