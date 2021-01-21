@@ -191,7 +191,7 @@ public class MdjMojo extends AbstractMojo {
         } catch (IOException | InvalidParameterValueException
                  | IniFileFormatException | InvalidProgramStateException | URISyntaxException ex)
         {
-            Logger.getLogger(MdjMojo.class.getName()).log(Level.SEVERE, null, ex);
+            log.error(ex);
         }
     }
 }
