@@ -26,7 +26,6 @@ import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
@@ -90,6 +89,16 @@ public class MdjJarMojo extends AbstractMojo {
      */
     @Parameter(defaultValue = "${project.build.directory}", readonly = true)
     private String buildDir;
+    /**
+     * The document root directory.
+     * <p>
+     * This is the same directory as the root of your document source files (*.md).<br>
+     * For instance it might be: {@code src/docs/manual}. This must be supplied even if
+     * you are packaging your document source files, giving the same directory
+     * as for: {@link #jarSrcDir}. The program makes <b>no</b> assumptions.
+     */
+    @Parameter(required = true)
+    private String docRootDir;
 
     /**
      * The name of the new 'jar' file.
@@ -138,23 +147,6 @@ public class MdjJarMojo extends AbstractMojo {
     private String jarSrcDir;
 
     /**
-     * The document root directory.
-     * <p>
-     * This is the same directory as the root of your document source files (*.md).<br>
-     * For instance it might be: {@code src/docs/manual}. This must be supplied even if
-     * you are packaging your document source files, giving the same directory
-     * as for: {@link #jarSrcDir}. The program makes <b>no</b> assumptions.
-     */
-    @Parameter(required = true)
-    private String docRootDir;
-
-    /**
-     * Define a static logger variable so that it references the
-     * Logger instance named "CreateXMLMojoTest".
-     */
-    private final Log log = getLog();
-
-    /**
      * Set the level of verbosity.
      * <ul>
      * <li>'0' is off.</li>
@@ -167,8 +159,8 @@ public class MdjJarMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        log.info("MDj Maven Plugin");
-        log.info("================");
+        getLog().info("MDj Maven Plugin");
+        getLog().info("================");
 
         // Setup parameter list for mdj-cli program.
         List<String> args = new ArrayList<>();
@@ -184,18 +176,38 @@ public class MdjJarMojo extends AbstractMojo {
             args.add("" + verbosity);
         }
 
-        log.info(args.toString());
+        getLog().info(args.toString());
 
         // Execute the program code...
         try
         {
             int exitcode = Main.execute(args.toArray(new String[args.size()]));
-            log.info("Exit: " + exitcode);
+            getLog().info("Exit: " + exitcode);
         } catch (IOException | IniFileFormatException | URISyntaxException ex)
         {
-            log.error(MdjJarMojo.class.getName(), ex);
+            getLog().error(MdjJarMojo.class.getName(), ex);
             throw new MojoExecutionException("MDj CLI threw an exception:", ex);
         }
+    }
+
+    /**
+     * Check the directory's path and make it absolute.
+     *
+     * @return full path to directory.
+     */
+    private String prepareDirectoryPath(String directory) {
+        String rtn = "";
+        Path dirPath = of(directory).normalize();
+
+        if (dirPath.isAbsolute())
+        {
+            rtn = dirPath.toString();
+        } else
+        {
+            rtn = dirPath.toAbsolutePath().toString();
+        }
+
+        return rtn;
     }
 
     /**
@@ -217,26 +229,6 @@ public class MdjJarMojo extends AbstractMojo {
         } else
         {
             rtn = jarFilePath.toAbsolutePath().toString();
-        }
-
-        return rtn;
-    }
-
-    /**
-     * Check the directory's path and make it absolute.
-     *
-     * @return full path to directory.
-     */
-    private String prepareDirectoryPath(String directory) {
-        String rtn = "";
-        Path dirPath = of(directory).normalize();
-
-        if (dirPath.isAbsolute())
-        {
-            rtn = dirPath.toString();
-        } else
-        {
-            rtn = dirPath.toAbsolutePath().toString();
         }
 
         return rtn;

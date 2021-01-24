@@ -28,7 +28,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
@@ -84,16 +83,10 @@ public class MdjCleanMojo extends AbstractMojo {
     @Parameter(property = "mdj.directory.destination", defaultValue = "target/docs")
     private String destination;
 
-    /**
-     * Define a static logger variable so that it references the
-     * Logger instance named "CreateXMLMojoTest".
-     */
-    private final Log log = getLog();
-
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        log.info("MDj Maven Plugin");
-        log.info("================");
+        getLog().info("MDj Maven Plugin");
+        getLog().info("================");
 
         Path destDirPath = of(destination).normalize().toAbsolutePath();
 
@@ -102,12 +95,6 @@ public class MdjCleanMojo extends AbstractMojo {
             try
             {
                 Files.walkFileTree(destDirPath, new SimpleFileVisitor<Path>() {
-                               @Override
-                               public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-                                       throws IOException {
-                                   Files.delete(file);
-                                   return FileVisitResult.CONTINUE;
-                               }
 
                                @Override
                                public FileVisitResult postVisitDirectory(Path dir, IOException ioe)
@@ -121,6 +108,13 @@ public class MdjCleanMojo extends AbstractMojo {
                                        // directory iteration failed
                                        throw ioe;
                                    }
+                               }
+
+                               @Override
+                               public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+                                       throws IOException {
+                                   Files.delete(file);
+                                   return FileVisitResult.CONTINUE;
                                }
                            });
             } catch (IOException ex)

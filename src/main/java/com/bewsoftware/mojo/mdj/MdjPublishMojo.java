@@ -25,7 +25,6 @@ import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
@@ -167,12 +166,6 @@ public class MdjPublishMojo extends AbstractMojo {
     private boolean disallowBrowserFileCaching;
 
     /**
-     * Define a static logger variable so that it references the
-     * Logger instance named "CreateXMLMojoTest".
-     */
-    private final Log log = getLog();
-
-    /**
      * List of ServerContext objects.
      * <p>
      * Add:
@@ -194,8 +187,8 @@ public class MdjPublishMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        log.info("MDj Maven Plugin");
-        log.info("================");
+        getLog().info("MDj Maven Plugin");
+        getLog().info("================");
 
         // Setup parameter list for mdj-cli program.
         List<String> args = new ArrayList<>();
@@ -223,16 +216,16 @@ public class MdjPublishMojo extends AbstractMojo {
             args.add("-p");
             args.add("/=");
         }
-        log.info(args.toString());
+        getLog().info(args.toString());
 
         // Execute the program code...
         try
         {
             int exitcode = Main.execute(args.toArray(new String[args.size()]));
-            log.info("Exit: " + exitcode);
+            getLog().info("Exit: " + exitcode);
         } catch (IOException | IniFileFormatException | URISyntaxException ex)
         {
-            log.error(MdjPublishMojo.class.getName(), ex);
+            getLog().error(MdjPublishMojo.class.getName(), ex);
             throw new MojoExecutionException("MDj CLI threw an exception:", ex);
         }
     }

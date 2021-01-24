@@ -13,14 +13,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.apache.maven.plugin.logging.Log;
 
 import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOURCES;
 
@@ -78,34 +75,22 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOU
 public class MdjMojo extends AbstractMojo {
 
     /**
-     * Define a static logger variable so that it references the
-     * Logger instance named "CreateXMLMojoTest".
-     */
-    private final Log log = getLog();
-
-    /**
-     * The source directory for markdown files.
-     */
-    @Parameter(property = "mdj.directory.source", defaultValue = "src/docs")
-    private String source;
-
-    /**
      * The destination directory for HTML files.
      */
     @Parameter(property = "mdj.directory.destination", defaultValue = "target/docs")
     private String destination;
 
     /**
-     * Process meta block, wrapping your document with templates and style sheets.
-     */
-    @Parameter(defaultValue = "true")
-    private boolean wrapper;
-
-    /**
      * Recursively process directories.
      */
     @Parameter(defaultValue = "true")
     private boolean recursive;
+
+    /**
+     * The source directory for markdown files.
+     */
+    @Parameter(property = "mdj.directory.source", defaultValue = "src/docs")
+    private String source;
 
     /**
      * Set the level of verbosity.
@@ -118,10 +103,16 @@ public class MdjMojo extends AbstractMojo {
     @Parameter(defaultValue = "0")
     private int verbosity;
 
+    /**
+     * Process meta block, wrapping your document with templates and style sheets.
+     */
+    @Parameter(defaultValue = "true")
+    private boolean wrapper;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        log.info("MDj Maven Plugin");
-        log.info("================");
+        getLog().info("MDj Maven Plugin");
+        getLog().info("================");
 
         List<String> args = new ArrayList<>();
 
@@ -153,7 +144,7 @@ public class MdjMojo extends AbstractMojo {
             args.add("" + verbosity);
         }
 
-        log.info(args.toString());
+        getLog().info(args.toString());
 
         try
         {
@@ -161,7 +152,7 @@ public class MdjMojo extends AbstractMojo {
 
             if (exitcode == 4)
             {
-                log.info("Initializing wrapper directories and files...");
+                getLog().info("Initializing wrapper directories and files...");
 
                 List<String> args2 = new ArrayList<>();
                 if (source.isBlank())
@@ -183,15 +174,15 @@ public class MdjMojo extends AbstractMojo {
 
                 if (exitcode == 0)
                 {
-                    log.info("Wrapper initialization complete.");
+                    getLog().info("Wrapper initialization complete.");
                 }
             }
 
-            log.info("Exit: " + exitcode);
+            getLog().info("Exit: " + exitcode);
         } catch (IOException | InvalidParameterValueException
                  | IniFileFormatException | InvalidProgramStateException | URISyntaxException ex)
         {
-            log.error(ex);
+            getLog().error(ex);
         }
     }
 }
