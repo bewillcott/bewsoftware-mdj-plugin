@@ -521,11 +521,6 @@
                     <artifactId>bewsoftware-mdj-plugin</artifactId>
                     <version>${project.version}</version>
                 </plugin>
-                <plugin>                        
-                    <groupId>com.bew.mojo</groupId>
-                    <artifactId>simple-buildnumber-maven-plugin</artifactId>
-                    <version>1.0.15</version>
-                </plugin>                
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
