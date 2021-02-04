@@ -51,8 +51,7 @@ so it only runs when you need it to.
 - [manual]
 - [mdj]
 - [publish]
-- [@right dropdown] [About]
-[@dropdown-content]
+- [@right] [About]
     - [ToDo List]
     - [License]
 

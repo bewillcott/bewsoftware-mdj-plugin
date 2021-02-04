@@ -102,8 +102,7 @@ Set the level of verbosity.
 - [manual]
 - [@active] [mdj](#)
 - [publish]
-- [@right dropdown] [About]
-[@dropdown-content]
+- [@right] [About]
     - [ToDo List]
     - [License]
 

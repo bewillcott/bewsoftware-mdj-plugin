@@ -717,8 +717,7 @@ Public License instead of this License.  But first, please read
 - [manual]
 - [mdj]
 - [publish]
-- [@right dropdown subactive] [About]
-[@dropdown-content]
+- [@right subactive] [About]
     - [ToDo List]
     - [@active] [License](#)
 

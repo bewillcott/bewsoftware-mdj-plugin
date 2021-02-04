@@ -15,8 +15,7 @@ Currently there are no items on this list.
 - [manual]
 - [mdj]
 - [publish]
-- [@right dropdown subactive] [About]
-[@dropdown-content]
+- [@right subactive] [About]
     - [@active] [ToDo List](#)
     - [License]
 

@@ -18,6 +18,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 
 import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOURCES;
 
@@ -79,6 +80,12 @@ public class MdjMojo extends AbstractMojo {
      */
     @Parameter(property = "mdj.directory.destination", defaultValue = "target/docs")
     private String destination;
+
+    /**
+     * The maven project.
+     */
+    @Parameter(defaultValue = "${project}", readonly = true, required = true)
+    private MavenProject project;
 
     /**
      * Recursively process directories.
@@ -143,6 +150,13 @@ public class MdjMojo extends AbstractMojo {
             args.add("-v");
             args.add("" + verbosity);
         }
+
+        // pom.xml file
+        args.add("-P");
+        args.add("pom.xml");
+
+        args.add("-D");
+        args.add("filename=" + project.getBuild().getFinalName() + ".jar");
 
         getLog().info(args.toString());
 
