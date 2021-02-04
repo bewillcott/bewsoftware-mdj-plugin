@@ -60,8 +60,7 @@ This plugin requires some other projects, to be able to compile this one:
 - [manual]
 - [mdj]
 - [publish]
-- [@right dropdown] [About]
-[@dropdown-content]
+- [@right] [About]
     - [ToDo List]
     - [License]
 

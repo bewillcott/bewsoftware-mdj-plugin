@@ -189,8 +189,7 @@ The HTML source. Either:
 - [manual]
 - [mdj]
 - [@active] [publish](#)
-- [@right dropdown] [About]
-[@dropdown-content]
+- [@right] [About]
     - [ToDo List]
     - [License]
 

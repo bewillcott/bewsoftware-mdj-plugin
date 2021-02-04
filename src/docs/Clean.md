@@ -68,8 +68,7 @@ When setting it, be sure to change the parameter to your output directory.
 - [manual]
 - [mdj]
 - [publish]
-- [@right dropdown] [About]
-[@dropdown-content]
+- [@right] [About]
     - [ToDo List]
     - [License]
 

@@ -4,7 +4,7 @@ title: ${document.name} | About
 @@@
 
 
-## About - v${document.version}
+## About - v${project.version}
 
     BEWSoftware MDj Maven Plugin is a wrapper Maven plugin for the
     BEWSoftware MDj CLI program.
@@ -49,8 +49,7 @@ is one possible implementation of that requirement.
 - [manual]
 - [mdj]
 - [publish]
-- [@right dropdown active] [About](#)
-[@dropdown-content]
+- [@right active] [About](#)
     - [ToDo List]
     - [License]
 
