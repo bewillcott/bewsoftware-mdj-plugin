@@ -1,6 +1,9 @@
 <#if licenseFirst??>
 ${licenseFirst}
 </#if>
+${licensePrefix}'BEWSoftware MDj Maven Plugin' is a wrapper Maven plugin for the
+${licensePrefix}'BEWSoftware MDj Cli' program.
+${licensePrefix?replace(" +$", "", "r")}
 ${licensePrefix}Copyright (C) 2020, 2021 Bradley Willcott <mailto:bw.opensource@yahoo.com>
 ${licensePrefix?replace(" +$", "", "r")}
 ${licensePrefix}This program is free software: you can redistribute it and/or modify
