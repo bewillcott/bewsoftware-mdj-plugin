@@ -1,5 +1,8 @@
 /*
- * Copyright (C) 2020 <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
+ * 'BEWSoftware MDj Maven Plugin' is a wrapper Maven plugin for the
+ * 'BEWSoftware MDj Cli' program.
+ *
+ * Copyright (C) 2020, 2021 Bradley Willcott <mailto:bw.opensource@yahoo.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
