@@ -1,11 +1,9 @@
 @@@
-use : articles
-title: Your Manual
+use: articles2
+title: ${document.name}
 @@@
 
-[About]
-
-# Your Manual
+# ${document.name}
 
 ---
 
@@ -35,4 +33,10 @@ Some junk.
 - [x][@yourClass] A checked mutable checkbox with the class attribute: `yourClass`.
 - [X]![@bestClass] A checked immutable checkbox with the class attribute: `bestClass`.
 
+@@@[#navbar]
+- [@active] [Home](#)
+- [@right] [About]
+
 [About]:About.html
+[Home]:index.html
+@@@

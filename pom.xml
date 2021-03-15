@@ -4,7 +4,7 @@
 
     <groupId>com.bewsoftware.mojo</groupId>
     <artifactId>bewsoftware-mdj-plugin</artifactId>
-    <version>1.1.3</version>
+    <version>1.1.4</version>
     <packaging>maven-plugin</packaging>
 
     <name>BEWSoftware MDj Maven Plugin</name>
@@ -16,8 +16,10 @@
 
     <properties>
         <!-- This setting must be the version of "bewsoftware-mdj-cli" that is a dependency -->
-        <mdj.cli.version>1.1.3</mdj.cli.version>
+        <mdj.cli.version>1.1.4</mdj.cli.version>
         
+        <docs.source>src/docs</docs.source>
+        <docs.target>target/docs</docs.target>
         <maven.version>3.6.3</maven.version>
         <java.version>12</java.version>
         <source.encoding>UTF-8</source.encoding>
@@ -148,6 +150,8 @@
                                     <goal>mdj</goal>
                                 </goals>
                                 <configuration>
+                                    <source>${docs.source}</source>
+                                    <destination>${docs.target}</destination>
                                     <verbosity></verbosity>
                                 </configuration>
                             </execution>
@@ -170,7 +174,13 @@
                                 <goals>
                                     <goal>clean</goal>
                                     <goal>mdj</goal>
-                                </goals>
+                                </goals>                                
+                                <configuration>
+                                    <source>${docs.source}</source>
+                                    <destination>${docs.target}</destination>
+                                    <verbosity></verbosity>
+                                </configuration>
+
                             </execution>
                         </executions>
                     </plugin>
@@ -233,12 +243,16 @@
                                     <goal>mdj</goal>                                    
                                     <goal>publish</goal>
                                 </goals>
-                                <configuration>
+                                <configuration>                                
+                                    <source>${docs.source}</source>
+                                    <destination>${docs.target}</destination>
+                                    <verbosity></verbosity>
+
                                     <disallowBrowserFileCaching>true</disallowBrowserFileCaching>
                                     <serverContexts>
                                         <serverContext>
                                             <context>/</context>
-                                            <htmlSource>target/docs</htmlSource>
+                                            <htmlSource>${docs.target}</htmlSource>
                                         </serverContext>
                                         <serverContext>
                                             <context>/site</context>
@@ -271,12 +285,16 @@
                                     <goal>mdj</goal>                                    
                                     <goal>publish</goal>
                                 </goals>
-                                <configuration>
+                                <configuration>                                    
+                                    <source>${docs.source}</source>
+                                    <destination>${docs.target}</destination>
+                                    <verbosity></verbosity>
+
                                     <disallowBrowserFileCaching>true</disallowBrowserFileCaching>
                                     <serverContexts>
                                         <serverContext>
                                             <context>/</context>
-                                            <htmlSource>target/docs</htmlSource>
+                                            <htmlSource>${docs.target}</htmlSource>
                                         </serverContext>
                                     </serverContexts>
                                 </configuration>
@@ -304,12 +322,13 @@
                                 </goals>
                                 <configuration>                                    
                                     <disallowBrowserFileCaching>true</disallowBrowserFileCaching>
-                                    <source>src/docs/manual</source>
-                                    <destination>target/docs/manual</destination>
+                                    <source>${docs.source}</source>
+                                    <destination>${docs.target}</destination>
+                                    <verbosity></verbosity>
                                     <serverContexts>
                                         <serverContext>
                                             <context>/</context>
-                                            <htmlSource>target/docs/manual</htmlSource>
+                                            <htmlSource>${docs.target}</htmlSource>
                                         </serverContext>
                                     </serverContexts>
                                 </configuration>
@@ -362,6 +381,11 @@
                                 <goals>
                                     <goal>mdj</goal>
                                 </goals>
+                                <configuration>
+                                    <source>${docs.source}</source>
+                                    <destination>${docs.target}</destination>
+                                    <verbosity></verbosity>
+                                </configuration>
                             </execution>
                             <execution>
                                 <id>MDj-Package(HTML)</id>
@@ -369,9 +393,9 @@
                                     <goal>jar</goal>
                                 </goals>
                                 <configuration>
-                                    <jarSrcDir>target/docs</jarSrcDir>
+                                    <jarSrcDir>${docs.target}</jarSrcDir>
                                     <jarFilename>${project.build.finalName}-manual.jar</jarFilename>
-                                    <docRootDir>src/docs</docRootDir>
+                                    <docRootDir>${docs.source}</docRootDir>
                                     <verbosity></verbosity>
                                 </configuration>
                             </execution>
@@ -381,9 +405,9 @@
                                     <goal>jar</goal>
                                 </goals>
                                 <configuration>
-                                    <jarSrcDir>src/docs</jarSrcDir>
+                                    <jarSrcDir>${docs.source}</jarSrcDir>
                                     <jarFilename>${project.build.finalName}-manual-src.jar</jarFilename>
-                                    <docRootDir>src/docs</docRootDir>
+                                    <docRootDir>${docs.source}</docRootDir>
                                     <verbosity></verbosity>
                                 </configuration>
                             </execution>
@@ -494,7 +518,7 @@
             </resource>
             <resource>
                 <directory>
-                    src/docs
+                    ${docs.source}
                 </directory>
                 <excludes>
                     <exclude>
@@ -504,7 +528,7 @@
             </resource>
             <resource>
                 <directory>
-                    target/docs
+                    ${docs.target}
                 </directory>
                 <excludes>
                     <exclude>
@@ -668,7 +692,7 @@
                             <resources>
                                 <resource>
                                     <directory>
-                                        target/docs
+                                        ${docs.target}
                                     </directory>
                                 </resource>
                             </resources>
