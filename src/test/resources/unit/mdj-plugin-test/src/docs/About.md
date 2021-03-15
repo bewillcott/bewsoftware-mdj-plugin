@@ -1,17 +1,20 @@
 @@@
-use : articles
-title: Your Manual | About
+use : articles2
+title: ${document.name} | About
 @@@
 
 
-[Home]
+## About - v${project.version}
 
----
-
-# About
 
 This is an about file.
 
 Maybe there should be more in it?
 
+@@@[#navbar]
+- [Home]
+- [@right active] [About](#)
+
+[About]:About.html
 [Home]:index.html
+@@@
