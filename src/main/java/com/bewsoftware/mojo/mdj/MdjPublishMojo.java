@@ -19,10 +19,8 @@
  */
 package com.bewsoftware.mojo.mdj;
 
-import com.bewsoftware.fileio.ini.IniFileFormatException;
 import com.bewsoftware.mdj.cli.Main;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
@@ -136,11 +134,11 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PROCESS_RESOUR
  * </code></pre>
  * The configuration settings above are only a suggestion. You will need to
  * set them as you require.<br>
- * I suggest that putting the plugin into a separate profile would be a good idea,
- * so it only runs when you need it to.
+ * I suggest that putting the plugin into a separate profile would be a good
+ * idea, so it only runs when you need it to.
  * <p>
- * NOTE: Combining them, as shown in the top example, publishes them under the one
- * server. Therefore, both are available using the same port number.
+ * NOTE: Combining them, as shown in the top example, publishes them under the
+ * one server. Therefore, both are available using the same port number.
  * <p>
  * By putting them in separate plugins, as in the bottom example, each
  * is published under a separate instance of the server, with a different port
@@ -154,7 +152,8 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PROCESS_RESOUR
  * @version 1.0.33
  */
 @Mojo(name = "publish", defaultPhase = PROCESS_RESOURCES)
-public class MdjPublishMojo extends AbstractMojo {
+public class MdjPublishMojo extends AbstractMojo
+{
 
     /**
      * Allow a directory listing to be generated, if no 'index' file found.
@@ -163,7 +162,8 @@ public class MdjPublishMojo extends AbstractMojo {
     private boolean allowGeneratedIndex;
 
     /**
-     * Disallow web browsers caching the files sent by this instance of the web server.
+     * Disallow web browsers caching the files sent by this instance of the web
+     * server.
      */
     @Parameter(defaultValue = "false")
     private boolean disallowBrowserFileCaching;
@@ -189,7 +189,8 @@ public class MdjPublishMojo extends AbstractMojo {
     private List<ServerContext> serverContexts;
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() throws MojoExecutionException, MojoFailureException
+    {
         getLog().info("MDj Maven Plugin");
         getLog().info("================");
 
@@ -212,7 +213,7 @@ public class MdjPublishMojo extends AbstractMojo {
             {
                 args.add("-p");
                 args.add((conf.context() != null ? conf.context() : "/") + "="
-                         + (conf.htmlSource() != null ? conf.htmlSource() : ""));
+                        + (conf.htmlSource() != null ? conf.htmlSource() : ""));
             });
         } else
         {
@@ -224,9 +225,9 @@ public class MdjPublishMojo extends AbstractMojo {
         // Execute the program code...
         try
         {
-            int exitcode = Main.execute(args.toArray(new String[args.size()]));
+            int exitcode = Main.execute(args.toArray(String[]::new));
             getLog().info("Exit: " + exitcode);
-        } catch (IOException | IniFileFormatException | URISyntaxException ex)
+        } catch (IOException ex)
         {
             getLog().error(MdjPublishMojo.class.getName(), ex);
             throw new MojoExecutionException("MDj CLI threw an exception:", ex);

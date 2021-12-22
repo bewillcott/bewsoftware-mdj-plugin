@@ -28,7 +28,8 @@ package com.bewsoftware.mojo.mdj;
  * @since 0.29.9
  * @version 1.0.30
  */
-public class ServerContext {
+public class ServerContext
+{
 
     /**
      * The HTTP Server context to publish your files to.
@@ -39,14 +40,16 @@ public class ServerContext {
      * The HTML source.
      * <p>
      * This is either the directory containing the HTML files to publish,
-     * or it is the path to the 'jar' file (including it's filename and extension).
+     * or it is the path to the 'jar' file (including it's filename and
+     * extension).
      */
     private String htmlSource;
 
     /**
      * Create an instance of the class.
      */
-    public ServerContext() {
+    public ServerContext()
+    {
     }
 
     /**
@@ -54,7 +57,8 @@ public class ServerContext {
      *
      * @return the value.
      */
-    public String context() {
+    public String context()
+    {
         return context;
     }
 
@@ -62,16 +66,19 @@ public class ServerContext {
      * The HTML source.
      * <p>
      * This is either the directory containing the HTML files to publish,
-     * or it is the path to the 'jar' file (including it's filename and extension).
+     * or it is the path to the 'jar' file (including it's filename and
+     * extension).
      *
      * @return the directory.
      */
-    public String htmlSource() {
+    public String htmlSource()
+    {
         return htmlSource;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return context + " = " + htmlSource;
     }
 }

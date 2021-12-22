@@ -66,8 +66,8 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.INITIALIZE;
  *  &lt;/build&gt;
  *&lt;/project&gt;
  * </code></pre>
- * I suggest that putting the plugin into a separate profile would be a good idea,
- * so it only runs when you need it to.
+ * I suggest that putting the plugin into a separate profile would be a good
+ * idea, so it only runs when you need it to.
  *
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
@@ -75,7 +75,8 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.INITIALIZE;
  * @version 1.0
  */
 @Mojo(name = "clean", defaultPhase = INITIALIZE)
-public class MdjCleanMojo extends AbstractMojo {
+public class MdjCleanMojo extends AbstractMojo
+{
 
     /**
      * The destination directory for HTML files.
@@ -84,7 +85,8 @@ public class MdjCleanMojo extends AbstractMojo {
     private String destination;
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() throws MojoExecutionException, MojoFailureException
+    {
         getLog().info("MDj Maven Plugin");
         getLog().info("================");
 
@@ -94,29 +96,32 @@ public class MdjCleanMojo extends AbstractMojo {
         {
             try
             {
-                Files.walkFileTree(destDirPath, new SimpleFileVisitor<Path>() {
+                Files.walkFileTree(destDirPath, new SimpleFileVisitor<Path>()
+                {
 
-                               @Override
-                               public FileVisitResult postVisitDirectory(Path dir, IOException ioe)
-                                       throws IOException {
-                                   if (ioe == null)
-                                   {
-                                       Files.delete(dir);
-                                       return FileVisitResult.CONTINUE;
-                                   } else
-                                   {
-                                       // directory iteration failed
-                                       throw ioe;
-                                   }
-                               }
+                    @Override
+                    public FileVisitResult postVisitDirectory(Path dir, IOException ioe)
+                            throws IOException
+                    {
+                        if (ioe == null)
+                        {
+                            Files.delete(dir);
+                            return FileVisitResult.CONTINUE;
+                        } else
+                        {
+                            // directory iteration failed
+                            throw ioe;
+                        }
+                    }
 
-                               @Override
-                               public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
-                                       throws IOException {
-                                   Files.delete(file);
-                                   return FileVisitResult.CONTINUE;
-                               }
-                           });
+                    @Override
+                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+                            throws IOException
+                    {
+                        Files.delete(file);
+                        return FileVisitResult.CONTINUE;
+                    }
+                });
             } catch (IOException ex)
             {
                 throw new MojoExecutionException("Directory iteration failed", ex);

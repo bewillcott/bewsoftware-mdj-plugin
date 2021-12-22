@@ -47,7 +47,7 @@ public class MdjMojoTest {
     public void testMdjGoal() throws Exception {
         log.traceEntry();
 
-        File baseDir = new File("target/test-classes/unit/project-to-test");
+        File baseDir = new File("target/test-classes/unit/mdj-plugin-test");
         assertNotNull(baseDir);
         log.debug("baseDir: {}", baseDir);
         assertTrue(baseDir.exists());

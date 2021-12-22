@@ -19,10 +19,8 @@
  */
 package com.bewsoftware.mojo.mdj;
 
-import com.bewsoftware.fileio.ini.IniFileFormatException;
 import com.bewsoftware.mdj.cli.Main;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
@@ -79,8 +77,8 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.INITIALIZE;
  *  &lt;/build&gt;
  *&lt;/project&gt;
  * </code></pre>
- * I suggest that putting the plugin into a separate profile would be a good idea,
- * so it only runs when you need it to.
+ * I suggest that putting the plugin into a separate profile would be a good
+ * idea, so it only runs when you need it to.
  *
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
@@ -88,10 +86,12 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.INITIALIZE;
  * @version 0.29.9
  */
 @Mojo(name = "manual", defaultPhase = INITIALIZE)
-public class MdjManualMojo extends AbstractMojo {
+public class MdjManualMojo extends AbstractMojo
+{
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() throws MojoExecutionException, MojoFailureException
+    {
         getLog().info("MDj Maven Plugin");
         getLog().info("================");
 
@@ -105,9 +105,9 @@ public class MdjManualMojo extends AbstractMojo {
         // Execute the program code...
         try
         {
-            int exitcode = Main.execute(args.toArray(new String[args.size()]));
+            int exitcode = Main.execute(args.toArray(String[]::new));
             getLog().info("Exit: " + exitcode);
-        } catch (IOException | IniFileFormatException | URISyntaxException ex)
+        } catch (IOException ex)
         {
             getLog().error(MdjJarMojo.class.getName(), ex);
             throw new MojoExecutionException("MDj CLI threw an exception:", ex);

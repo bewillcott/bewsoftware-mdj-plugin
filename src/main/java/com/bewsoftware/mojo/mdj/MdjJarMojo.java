@@ -19,10 +19,8 @@
  */
 package com.bewsoftware.mojo.mdj;
 
-import com.bewsoftware.fileio.ini.IniFileFormatException;
 import com.bewsoftware.mdj.cli.Main;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,8 +74,8 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PACKAGE;
  *  &lt;/build&gt;
  *&lt;/project&gt;
  * </code></pre>
- * I suggest that putting the plugin into a separate profile would be a good idea,
- * so it only runs when you need it to.
+ * I suggest that putting the plugin into a separate profile would be a good
+ * idea, so it only runs when you need it to.
  *
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
@@ -85,20 +83,24 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.PACKAGE;
  * @version 0.24.0
  */
 @Mojo(name = "jar", defaultPhase = PACKAGE)
-public class MdjJarMojo extends AbstractMojo {
+public class MdjJarMojo extends AbstractMojo
+{
 
     /**
      * The project build output directory.
      */
     @Parameter(defaultValue = "${project.build.directory}", readonly = true)
     private String buildDir;
+
     /**
      * The document root directory.
      * <p>
-     * This is the same directory as the root of your document source files (*.md).<br>
-     * For instance it might be: {@code src/docs/manual}. This must be supplied even if
-     * you are packaging your document source files, giving the same directory
-     * as for: {@link #jarSrcDir}. The program makes <b>no</b> assumptions.
+     * This is the same directory as the root of your document source files
+     * (*.md).<br>
+     * For instance it might be: {@code src/docs/manual}. This must be supplied
+     * even if you are packaging your document source files, giving the same
+     * directory as for: {@link #jarSrcDir}. The program makes <b>no</b>
+     * assumptions.
      */
     @Parameter(required = true)
     private String docRootDir;
@@ -108,9 +110,9 @@ public class MdjJarMojo extends AbstractMojo {
      * <p>
      * <b>File location:</b><br>
      * If you do not include a directory path, then it will be created in the
-     * {@code ${project.build.directory}}. If you give a relative directory path, then it will
-     * be taken to being relative to the project directory where the {@code pom.xml}
-     * file is located.
+     * {@code ${project.build.directory}}. If you give a relative directory
+     * path, then it will be taken to being relative to the project directory
+     * where the {@code pom.xml} file is located.
      * <p>
      * <b>File name:</b><br>
      * You must provide the full name of the file including the extension,
@@ -118,29 +120,36 @@ public class MdjJarMojo extends AbstractMojo {
      * <p>
      * <b>Suggestions:</b><br>
      * To pack up a copy of your HTML files:<br>
-     * if your 'destination' directory (*.html files) is: {@code target/docs/manual},<br>
-     * then a possible setting might be: {@code <jarFilename>myprog-1.0-manual.jar</jarFilename>}.
+     * if your 'destination' directory (*.html files) is:
+     * {@code target/docs/manual},<br>
+     * then a possible setting might be:
+     * {@code <jarFilename>myprog-1.0-manual.jar</jarFilename>}.
      * <p>
      * To pack up a copy of your Markdown files:<br>
      * if your 'source' directory (*.md files) is: {@code src/docs/manual},<br>
-     * then a possible setting might be: {@code <jarFilename>myprog-1.0-manual-src.jar</jarFilename>}.
+     * then a possible setting might be:
+     * {@code <jarFilename>myprog-1.0-manual-src.jar</jarFilename>}.
      */
     @Parameter(required = true)
     private String jarFilename;
+
     /**
      * The source directory for the files to be included in the new 'jar' file.
      * <p>
-     * Any relative path will be taken as being relative to the project directory
-     * where the {@code pom.xml} file is located.
+     * Any relative path will be taken as being relative to the project
+     * directory where the {@code pom.xml} file is located.
      * <p>
      * <b>Recursion:</b><br>
-     * This source directory and all subdirectories will be included in the jar file.
-     * There is currently NO option to just pack up the specific directory.
+     * This source directory and all subdirectories will be included in the jar
+     * file. There is currently NO option to just pack up the specific
+     * directory.
      * <p>
      * <b>Suggestions:</b><br>
      * To pack up a copy of your HTML files:<br>
-     * if your 'destination' directory (*.html files) is: {@code target/docs/manual},<br>
-     * then set the following: {@code <jarSrcDir>target/docs/manual</jarSrcDir>}.
+     * if your 'destination' directory (*.html files) is:
+     * {@code target/docs/manual},<br>
+     * then set the following:
+     * {@code <jarSrcDir>target/docs/manual</jarSrcDir>}.
      * <p>
      * To pack up a copy of your Markdown files:<br>
      * if your 'source' directory (*.md files) is: {@code src/docs/manual},<br>
@@ -161,7 +170,8 @@ public class MdjJarMojo extends AbstractMojo {
     private int verbosity;
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() throws MojoExecutionException, MojoFailureException
+    {
         getLog().info("MDj Maven Plugin");
         getLog().info("================");
 
@@ -170,8 +180,8 @@ public class MdjJarMojo extends AbstractMojo {
 
         args.add("-j");
         args.add(prepareJarFilePath() + ";"
-                 + prepareDirectoryPath(jarSrcDir) + ";"
-                 + prepareDirectoryPath(docRootDir));
+                + prepareDirectoryPath(jarSrcDir) + ";"
+                + prepareDirectoryPath(docRootDir));
 
         if (verbosity > 0)
         {
@@ -184,9 +194,9 @@ public class MdjJarMojo extends AbstractMojo {
         // Execute the program code...
         try
         {
-            int exitcode = Main.execute(args.toArray(new String[args.size()]));
+            int exitcode = Main.execute(args.toArray(String[]::new));
             getLog().info("Exit: " + exitcode);
-        } catch (IOException | IniFileFormatException | URISyntaxException ex)
+        } catch (IOException ex)
         {
             getLog().error(MdjJarMojo.class.getName(), ex);
             throw new MojoExecutionException("MDj CLI threw an exception:", ex);
@@ -198,8 +208,9 @@ public class MdjJarMojo extends AbstractMojo {
      *
      * @return full path to directory.
      */
-    private String prepareDirectoryPath(String directory) {
-        String rtn = "";
+    private String prepareDirectoryPath(String directory)
+    {
+        String rtn;
         Path dirPath = of(directory).normalize();
 
         if (dirPath.isAbsolute())
@@ -214,13 +225,14 @@ public class MdjJarMojo extends AbstractMojo {
     }
 
     /**
-     * Check the path of the {@link #jarFilename} and prepend as needed, making it
-     * absolute.
+     * Check the path of the {@link #jarFilename} and prepend as needed, making
+     * it absolute.
      *
      * @return full filename.
      */
-    private String prepareJarFilePath() {
-        String rtn = "";
+    private String prepareJarFilePath()
+    {
+        String rtn;
         Path jarFilePath = of(jarFilename).normalize();
 
         if (jarFilePath.isAbsolute())

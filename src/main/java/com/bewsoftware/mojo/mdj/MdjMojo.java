@@ -21,10 +21,8 @@ package com.bewsoftware.mojo.mdj;
 
 import com.bewsoftware.common.InvalidParameterValueException;
 import com.bewsoftware.common.InvalidProgramStateException;
-import com.bewsoftware.fileio.ini.IniFileFormatException;
 import com.bewsoftware.mdj.cli.Main;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
@@ -78,8 +76,8 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOU
  *  &lt;/build&gt;
  *&lt;/project&gt;
  * </code></pre>
- * I suggest that putting the plugin into a separate profile would be a good idea,
- * so it only runs when you need it to.
+ * I suggest that putting the plugin into a separate profile would be a good
+ * idea, so it only runs when you need it to.
  *
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
@@ -87,7 +85,8 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOU
  * @version 0.1
  */
 @Mojo(name = "mdj", defaultPhase = GENERATE_RESOURCES)
-public class MdjMojo extends AbstractMojo {
+public class MdjMojo extends AbstractMojo
+{
 
     /**
      * The destination directory for HTML files.
@@ -125,13 +124,15 @@ public class MdjMojo extends AbstractMojo {
     private int verbosity;
 
     /**
-     * Process meta block, wrapping your document with templates and style sheets.
+     * Process meta block, wrapping your document with templates and style
+     * sheets.
      */
     @Parameter(defaultValue = "true")
     private boolean wrapper;
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void execute() throws MojoExecutionException, MojoFailureException
+    {
         getLog().info("MDj Maven Plugin");
         getLog().info("================");
 
@@ -176,13 +177,14 @@ public class MdjMojo extends AbstractMojo {
 
         try
         {
-            int exitcode = Main.execute(args.toArray(new String[args.size()]));
+            int exitcode = Main.execute(args.toArray(String[]::new));
 
             if (exitcode == 4)
             {
                 getLog().info("Initializing wrapper directories and files...");
 
                 List<String> args2 = new ArrayList<>();
+
                 if (source.isBlank())
                 {
                     args2.add("-W");
@@ -198,7 +200,7 @@ public class MdjMojo extends AbstractMojo {
                     args2.add("" + verbosity);
                 }
 
-                exitcode = Main.execute(args2.toArray(new String[0]));
+                exitcode = Main.execute(args2.toArray(String[]::new));
 
                 if (exitcode == 0)
                 {
@@ -207,8 +209,7 @@ public class MdjMojo extends AbstractMojo {
             }
 
             getLog().info("Exit: " + exitcode);
-        } catch (IOException | InvalidParameterValueException
-                 | IniFileFormatException | InvalidProgramStateException | URISyntaxException ex)
+        } catch (IOException | InvalidParameterValueException | InvalidProgramStateException ex)
         {
             getLog().error(ex);
         }
