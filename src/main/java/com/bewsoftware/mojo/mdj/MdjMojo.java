@@ -2,7 +2,7 @@
  * 'BEWSoftware MDj Maven Plugin' is a wrapper Maven plugin for the
  * 'BEWSoftware MDj Cli' program.
  *
- * Copyright (C) 2020, 2021 Bradley Willcott <mailto:bw.opensource@yahoo.com>
+ * Copyright (C) 2020-2022 Bradley Willcott <mailto:bw.opensource@yahoo.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,14 +15,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 package com.bewsoftware.mojo.mdj;
 
-import com.bewsoftware.common.InvalidParameterValueException;
-import com.bewsoftware.common.InvalidProgramStateException;
 import com.bewsoftware.mdj.cli.Main;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
@@ -82,7 +79,7 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOU
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
  * @since 0.1
- * @version 0.1
+ * @version 2.0.0
  */
 @Mojo(name = "mdj", defaultPhase = GENERATE_RESOURCES)
 public class MdjMojo extends AbstractMojo
@@ -167,7 +164,7 @@ public class MdjMojo extends AbstractMojo
         }
 
         // pom.xml file
-        args.add("-P");
+        args.add("-p");
         args.add("pom.xml");
 
         args.add("-D");
@@ -209,9 +206,10 @@ public class MdjMojo extends AbstractMojo
             }
 
             getLog().info("Exit: " + exitcode);
-        } catch (IOException | InvalidParameterValueException | InvalidProgramStateException ex)
+        } catch (Exception ex)
         {
-            getLog().error(ex);
+            getLog().error(MdjMojo.class.getName(), ex);
+            throw new MojoExecutionException("MDj CLI threw an exception:", ex);
         }
     }
 }

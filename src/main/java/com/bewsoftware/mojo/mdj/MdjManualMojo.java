@@ -2,7 +2,7 @@
  * 'BEWSoftware MDj Maven Plugin' is a wrapper Maven plugin for the
  * 'BEWSoftware MDj Cli' program.
  *
- * Copyright (C) 2020, 2021 Bradley Willcott <mailto:bw.opensource@yahoo.com>
+ * Copyright (C) 2020-2022 Bradley Willcott <mailto:bw.opensource@yahoo.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,12 +15,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 package com.bewsoftware.mojo.mdj;
 
 import com.bewsoftware.mdj.cli.Main;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
@@ -83,12 +82,11 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.INITIALIZE;
  * @author <a href="mailto:bw.opensource@yahoo.com">Bradley Willcott</a>
  *
  * @since 0.1
- * @version 0.29.9
+ * @version 2.0.0
  */
 @Mojo(name = "manual", defaultPhase = INITIALIZE)
 public class MdjManualMojo extends AbstractMojo
 {
-
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
@@ -107,11 +105,10 @@ public class MdjManualMojo extends AbstractMojo
         {
             int exitcode = Main.execute(args.toArray(String[]::new));
             getLog().info("Exit: " + exitcode);
-        } catch (IOException ex)
+        } catch (Exception ex)
         {
             getLog().error(MdjJarMojo.class.getName(), ex);
             throw new MojoExecutionException("MDj CLI threw an exception:", ex);
         }
     }
-
 }
