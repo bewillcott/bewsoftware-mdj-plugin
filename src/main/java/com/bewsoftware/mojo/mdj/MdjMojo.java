@@ -45,7 +45,8 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOU
  * <p>
  * <b>To use:</b><br>
  * Add the following to your {@code pom.xml} file.
- * <pre><code>
+ * <p>
+ * {@snippet internal:
  *&lt;project&gt;
  *  ...
  *  &lt;build&gt;
@@ -72,7 +73,8 @@ import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOU
  *    &lt;/plugins&gt;
  *  &lt;/build&gt;
  *&lt;/project&gt;
- * </code></pre>
+ * }
+ * <p>
  * I suggest that putting the plugin into a separate profile would be a good
  * idea, so it only runs when you need it to.
  *

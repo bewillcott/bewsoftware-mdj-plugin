@@ -5,7 +5,7 @@
     <groupId>com.bewsoftware.mojo</groupId>
     <artifactId>bewsoftware-mdj-plugin</artifactId>
     <!-- This setting must be the version of "bewsoftware-mdj-cli" that is a dependency -->
-    <version>2.0.1</version>
+    <version>2.1.1</version>
     <packaging>maven-plugin</packaging>
 
     <name>BEWSoftware MDj Maven Plugin</name>
@@ -145,7 +145,7 @@
             <dependency>
                 <groupId>org.apache.maven.resolver</groupId>
                 <artifactId>maven-resolver-api</artifactId>
-                <version>1.7.2</version>
+                <version>1.8.2</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven</groupId>
@@ -155,7 +155,7 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-slf4j-impl</artifactId>
-                <version>2.17.2</version>
+                <version>2.18.0</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -165,7 +165,7 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-api</artifactId>
-                <version>2.17.2</version>
+                <version>2.18.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -597,7 +597,7 @@
                 <plugin>
                     <groupId>com.bewsoftware.mojo</groupId>
                     <artifactId>bewsoftware-mdj-plugin</artifactId>
-                    <version>${project.version}</version>
+                    <version>2.1.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -612,7 +612,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
@@ -628,7 +628,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0-M2</version>
+                    <version>3.0.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
@@ -636,7 +636,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.0.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-invoker-plugin</artifactId>
@@ -648,11 +648,11 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>3.4.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jxr-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-plugin-plugin</artifactId>
@@ -660,15 +660,15 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.4.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>4.0.0-M2</version>
+                    <version>4.0.0-M3</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
